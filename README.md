@@ -9,3 +9,8 @@ This code implements [Ceasar's code](https://en.wikipedia.org/wiki/Caesar_cipher
 Two sequences of characters. First is encrypted message and second is poorly understood original message (contains mistakes).
 ### Output
 Original message, return value is 0.
+
+
+## Password guesser
+
+Brute force way of guessing the password by making permutations of entered characters recursively.

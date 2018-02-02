@@ -20,4 +20,16 @@ Brute force way of guessing the password by making permutations of entered chara
 
 Nothing much to explain, maybe check out wikipedia page.
 
+## PPMImage reader
+
+### Input:
+
+PPMImage Filename as argv1
+
+### Output
+
+Focused PPMImage using convolution matrix
+
+
+
 

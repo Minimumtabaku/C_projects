@@ -18,4 +18,6 @@ Brute force way of guessing the password by making permutations of entered chara
 
 ## Circular que
 
-Nothing much to explain, maybe check out wikipedia page
+Nothing much to explain, maybe check out wikipedia page.
+
+

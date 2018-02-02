@@ -14,3 +14,8 @@ Original message, return value is 0.
 ## Password guesser
 
 Brute force way of guessing the password by making permutations of entered characters recursively.
+
+
+## Circular que
+
+Nothing much to explain, maybe check out wikipedia page

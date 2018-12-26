@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="1440" />
+    <option name="height" value="900" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+  </component>
+  <component name="RunManager" selected="Catch.Trivial use of push_back">
+    <configuration name="Default constructed list passes basic accessors" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="List" TARGET_NAME="tests-stage-1" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="List" RUN_TARGET_NAME="tests-stage-1" TEST_CLASS="[stage1]" TEST_METHOD="Default constructed list passes basic accessors" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Operator==, !=" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="List" TARGET_NAME="tests-stage-3" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="List" RUN_TARGET_NAME="tests-stage-3" TEST_CLASS="[stage3]" TEST_METHOD="Operator==, !=" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Trivial use of push_back" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="List" TARGET_NAME="tests-stage-1" RUN_TARGET_PROJECT_NAME="List" RUN_TARGET_NAME="tests-stage-1" TEST_CLASS="[stage1]" TEST_METHOD="Trivial use of push_back" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" EXPLICIT_BUILD_TARGET_NAME="all">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="tests-stage-1" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="List" TARGET_NAME="tests-stage-1" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="List" RUN_TARGET_NAME="tests-stage-1">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="tests-stage-2" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="List" TARGET_NAME="tests-stage-2" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="List" RUN_TARGET_NAME="tests-stage-2">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="tests-stage-3" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="List" TARGET_NAME="tests-stage-3" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="List" RUN_TARGET_NAME="tests-stage-3">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="tests-stage-4" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="List" TARGET_NAME="tests-stage-4" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="List" RUN_TARGET_NAME="tests-stage-4">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="tests-stage-5" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="List" TARGET_NAME="tests-stage-5" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="List" RUN_TARGET_NAME="tests-stage-5">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Build All" />
+      <item itemvalue="Application.tests-stage-1" />
+      <item itemvalue="Application.tests-stage-2" />
+      <item itemvalue="Application.tests-stage-3" />
+      <item itemvalue="Application.tests-stage-4" />
+      <item itemvalue="Application.tests-stage-5" />
+      <item itemvalue="Catch.Operator==, !=" />
+      <item itemvalue="Catch.Default constructed list passes basic accessors" />
+      <item itemvalue="Catch.Trivial use of push_back" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Catch.Trivial use of push_back" />
+        <item itemvalue="Catch.Default constructed list passes basic accessors" />
+        <item itemvalue="Catch.Operator==, !=" />
+      </list>
+    </recent_temporary>
+  </component>
+</project>

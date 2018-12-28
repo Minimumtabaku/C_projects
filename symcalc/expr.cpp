@@ -25,6 +25,7 @@ expr calculate_result_from_queue(std::queue<Token> rpnQueue){
             break;
         }
         Token symbol = rpnQueue.front();
+        rpnQueue.pop();
         if (symbol.id != TokenId::Number){
             if (symbols.size() >= 2 ){
 
@@ -33,23 +34,32 @@ expr calculate_result_from_queue(std::queue<Token> rpnQueue){
                 switch(symbol.id){
                     case TokenId::Plus:
                         expressions.push(x + y);
+                        break;
                     case TokenId::Minus:
                         expressions.push(x - y);
+                        break;
                     case TokenId::Divide:
                         expressions.push(x / y);
+                        break;
                     case TokenId::Multiply:
                         expressions.push(x * y);
+                        break;
                     case TokenId::Power:
                         expressions.push(pow(x,y));
+                        break;
                     case TokenId::Identifier:
                         if (symbol.identifier.compare("cos") == 0){
                             throw "undefined function identifier from calculate func";
+
                         }else if(symbol.identifier.compare("sin") == 0){
                             throw "undefined function identifier from calculate func";
+
                         }else if(symbol.identifier.compare("log") == 0){
                             throw "undefined function identifier from calculate func";
+
                         } else{
                             throw "undefined function identifier from calculate func";
+
                         }
 
                 }
@@ -57,17 +67,23 @@ expr calculate_result_from_queue(std::queue<Token> rpnQueue){
             }else if (symbols.size() < 2 && expressions.size() > 0){
                 expr x = expressions.top(); expressions.pop();
                 expr y = expressions.top(); expressions.pop();
+                //TODO: opacne x a y
                 switch(symbol.id){
                     case TokenId::Plus:
                         expressions.push(x + y);
+                        break;
                     case TokenId::Minus:
                         expressions.push(x - y);
+                        break;
                     case TokenId::Divide:
                         expressions.push(x / y);
+                        break;
                     case TokenId::Multiply:
                         expressions.push(x * y);
+                        break;
                     case TokenId::Power:
                         expressions.push(pow(x,y));
+                        break;
                     case TokenId::Identifier:
                         if (symbol.identifier.compare("cos") == 0){
                             throw "undefined function identifier from calculate func";
@@ -78,16 +94,16 @@ expr calculate_result_from_queue(std::queue<Token> rpnQueue){
                         } else{
                             throw "undefined function identifier from calculate func";
                         }
-
                 }
             }else{
                 throw "error in calculate func";
             }
         }else{
             symbols.push(symbol);
-            rpnQueue.pop();
+            //item was already popped at the beginning
         }
     }
+    return expressions.top();
 }
 
 expr create_expression_tree(const std::string& expression) {
@@ -138,13 +154,13 @@ expr create_expression_tree(const std::string& expression) {
         stack.pop();
     }
     //now we have a queue of symbols in RPN, we have to calculate the result and return expression containg other expressions
-    std::cout << 'printing content of queue' ;
-    while(!queue.empty()){
-        std::cout << ";;;" << queue.front();
-        queue.pop();
-    }
-    std::cout << std::endl;
-    return log(expr::number(10));
+//    std::cout << 'printing content of queue' ;
+//    while(!queue.empty()){
+//        std::cout << ";;;" << queue.front();
+//        queue.pop();
+//    }
+//    std::cout << std::endl;
+    return calculate_result_from_queue(queue);
 }
 
 //OPERATORS AND FUNCS

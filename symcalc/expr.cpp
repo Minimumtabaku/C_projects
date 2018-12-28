@@ -16,9 +16,79 @@ expr expr::variable(std::string name) {
 const expr expr::ZERO = expr::number(0.0);
 const expr expr::ONE = expr::number(1.0);
 
-// TODO:
-//       expr::number, expr::variable, operator==, operator<<,
-//       create_expression_tree
+expr calculate_result_from_queue(std::queue<Token> rpnQueue){
+    std::stack<Token> symbols;
+    std::stack<expr> expressions;
+
+    while(1){
+        if (rpnQueue.empty()){
+            break;
+        }
+        Token symbol = rpnQueue.front();
+        if (symbol.id != TokenId::Number){
+            if (symbols.size() >= 2 ){
+
+                expr x = expr::number(symbols.top().number); symbols.pop();
+                expr y = expr::number(symbols.top().number); symbols.pop();
+                switch(symbol.id){
+                    case TokenId::Plus:
+                        expressions.push(x + y);
+                    case TokenId::Minus:
+                        expressions.push(x - y);
+                    case TokenId::Divide:
+                        expressions.push(x / y);
+                    case TokenId::Multiply:
+                        expressions.push(x * y);
+                    case TokenId::Power:
+                        expressions.push(pow(x,y));
+                    case TokenId::Identifier:
+                        if (symbol.identifier.compare("cos") == 0){
+                            throw "undefined function identifier from calculate func";
+                        }else if(symbol.identifier.compare("sin") == 0){
+                            throw "undefined function identifier from calculate func";
+                        }else if(symbol.identifier.compare("log") == 0){
+                            throw "undefined function identifier from calculate func";
+                        } else{
+                            throw "undefined function identifier from calculate func";
+                        }
+
+                }
+                //TODO: get rid of this shit, make a tempalte func
+            }else if (symbols.size() < 2 && expressions.size() > 0){
+                expr x = expressions.top(); expressions.pop();
+                expr y = expressions.top(); expressions.pop();
+                switch(symbol.id){
+                    case TokenId::Plus:
+                        expressions.push(x + y);
+                    case TokenId::Minus:
+                        expressions.push(x - y);
+                    case TokenId::Divide:
+                        expressions.push(x / y);
+                    case TokenId::Multiply:
+                        expressions.push(x * y);
+                    case TokenId::Power:
+                        expressions.push(pow(x,y));
+                    case TokenId::Identifier:
+                        if (symbol.identifier.compare("cos") == 0){
+                            throw "undefined function identifier from calculate func";
+                        }else if(symbol.identifier.compare("sin") == 0){
+                            throw "undefined function identifier from calculate func";
+                        }else if(symbol.identifier.compare("log") == 0){
+                            throw "undefined function identifier from calculate func";
+                        } else{
+                            throw "undefined function identifier from calculate func";
+                        }
+
+                }
+            }else{
+                throw "error in calculate func";
+            }
+        }else{
+            symbols.push(symbol);
+            rpnQueue.pop();
+        }
+    }
+}
 
 expr create_expression_tree(const std::string& expression) {
     std::queue<Token> queue;
@@ -42,7 +112,6 @@ expr create_expression_tree(const std::string& expression) {
             stack.push(token);
         }
         else if (token.id == TokenId::RParen){
-            //TODO: heck if this is not endless loop
             while (stack.top().id != TokenId::LParen){
                 queue.push(stack.top());
                 stack.pop();
@@ -63,10 +132,12 @@ expr create_expression_tree(const std::string& expression) {
             stack.push(token);
         }
     }
+    //push the rest of the operands into the queue
     while (!stack.empty()){
         queue.push(stack.top());
         stack.pop();
     }
+    //now we have a queue of symbols in RPN, we have to calculate the result and return expression containg other expressions
     std::cout << 'printing content of queue' ;
     while(!queue.empty()){
         std::cout << ";;;" << queue.front();

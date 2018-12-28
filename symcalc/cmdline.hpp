@@ -2,7 +2,7 @@
 #ifndef PJC_SYMCALC_CMDLINE_HPP
 #define PJC_SYMCALC_CMDLINE_HPP
 
-#include <mapbox/variant.hpp>
+#include "mapbox/variant.hpp"
 #include <string>
 #include <vector>
 #include <map>

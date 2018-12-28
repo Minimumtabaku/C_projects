@@ -52,17 +52,24 @@ expr create_expression_tree(const std::string& expression) {
         }
         //this is basically checking for the operators
         else{
-            while (stack.top().id == TokenId::Identifier || stack.top().op_precedence() > token.op_precedence() && stack.top().id != TokenId::LParen){
+            while (stack.size() > 0 && stack.top().is_binary_op() &&
+            (stack.top().id == TokenId::Identifier || (stack.top().op_precedence() > token.op_precedence())
+            || (stack.top().op_precedence() >= token.op_precedence()  && stack.top().associativity() == Associativity::Left)
+            && stack.top().id != TokenId::LParen)){
+
                 queue.push(stack.top());
                 stack.pop();
             }
             stack.push(token);
         }
     }
-
+    while (!stack.empty()){
+        queue.push(stack.top());
+        stack.pop();
+    }
     std::cout << 'printing content of queue' ;
     while(!queue.empty()){
-        std::cout << ';;;' << queue.front();
+        std::cout << ";;;" << queue.front();
         queue.pop();
     }
     std::cout << std::endl;

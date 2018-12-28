@@ -11,7 +11,17 @@ expr.hpp
 /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/expr.hpp
 expr_impl.hpp
 /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/expr_impl.hpp
+tokenizer.hpp
+/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tokenizer.hpp
 stdexcept
+-
+sstream
+-
+stack
+-
+queue
+-
+iostream
 -
 
 /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/expr.hpp
@@ -28,19 +38,17 @@ exception
 cassert
 -
 
-/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/expr_impl.cpp
-expr_impl.hpp
-/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/expr_impl.hpp
-iostream
--
-cmath
--
-limits
--
-
 /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/expr_impl.hpp
 expr.hpp
 /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/expr.hpp
 iosfwd
+-
+
+/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tokenizer.hpp
+iosfwd
+-
+string
+-
+cassert
 -
 

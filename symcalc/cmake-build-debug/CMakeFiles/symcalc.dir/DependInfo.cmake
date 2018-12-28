@@ -4,12 +4,12 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/minimumtanaku/Downloads/symcalc-master/app.cpp" "/Users/minimumtanaku/Downloads/symcalc-master/cmake-build-debug/CMakeFiles/symcalc.dir/app.cpp.o"
-  "/Users/minimumtanaku/Downloads/symcalc-master/cmdline.cpp" "/Users/minimumtanaku/Downloads/symcalc-master/cmake-build-debug/CMakeFiles/symcalc.dir/cmdline.cpp.o"
-  "/Users/minimumtanaku/Downloads/symcalc-master/expr.cpp" "/Users/minimumtanaku/Downloads/symcalc-master/cmake-build-debug/CMakeFiles/symcalc.dir/expr.cpp.o"
-  "/Users/minimumtanaku/Downloads/symcalc-master/expr_impl.cpp" "/Users/minimumtanaku/Downloads/symcalc-master/cmake-build-debug/CMakeFiles/symcalc.dir/expr_impl.cpp.o"
-  "/Users/minimumtanaku/Downloads/symcalc-master/main.cpp" "/Users/minimumtanaku/Downloads/symcalc-master/cmake-build-debug/CMakeFiles/symcalc.dir/main.cpp.o"
-  "/Users/minimumtanaku/Downloads/symcalc-master/tokenizer.cpp" "/Users/minimumtanaku/Downloads/symcalc-master/cmake-build-debug/CMakeFiles/symcalc.dir/tokenizer.cpp.o"
+  "/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/app.cpp" "/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/cmake-build-debug/CMakeFiles/symcalc.dir/app.cpp.o"
+  "/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/cmdline.cpp" "/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/cmake-build-debug/CMakeFiles/symcalc.dir/cmdline.cpp.o"
+  "/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/expr.cpp" "/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/cmake-build-debug/CMakeFiles/symcalc.dir/expr.cpp.o"
+  "/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/expr_impl.cpp" "/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/cmake-build-debug/CMakeFiles/symcalc.dir/expr_impl.cpp.o"
+  "/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/main.cpp" "/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/cmake-build-debug/CMakeFiles/symcalc.dir/main.cpp.o"
+  "/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tokenizer.cpp" "/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/cmake-build-debug/CMakeFiles/symcalc.dir/tokenizer.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 

@@ -6,15 +6,19 @@
 
 #IncludeRegexTransform: 
 
-/Users/minimumtanaku/Downloads/symcalc-master/expr.cpp
+/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/expr.cpp
 expr.hpp
-/Users/minimumtanaku/Downloads/symcalc-master/expr.hpp
+/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/expr.hpp
 expr_impl.hpp
-/Users/minimumtanaku/Downloads/symcalc-master/expr_impl.hpp
+/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/expr_impl.hpp
+tokenizer.hpp
+/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tokenizer.hpp
 stdexcept
 -
+sstream
+-
 
-/Users/minimumtanaku/Downloads/symcalc-master/expr.hpp
+/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/expr.hpp
 iosfwd
 -
 string
@@ -28,19 +32,17 @@ exception
 cassert
 -
 
-/Users/minimumtanaku/Downloads/symcalc-master/expr_impl.cpp
-expr_impl.hpp
-/Users/minimumtanaku/Downloads/symcalc-master/expr_impl.hpp
-iostream
--
-cmath
--
-limits
+/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/expr_impl.hpp
+expr.hpp
+/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/expr.hpp
+iosfwd
 -
 
-/Users/minimumtanaku/Downloads/symcalc-master/expr_impl.hpp
-expr.hpp
-/Users/minimumtanaku/Downloads/symcalc-master/expr.hpp
+/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tokenizer.hpp
 iosfwd
+-
+string
+-
+cassert
 -
 

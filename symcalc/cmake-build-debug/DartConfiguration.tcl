@@ -4,8 +4,8 @@
 
 
 # Configuration directories and files
-SourceDirectory: /Users/minimumtanaku/Downloads/symcalc-master
-BuildDirectory: /Users/minimumtanaku/Downloads/symcalc-master/cmake-build-debug
+SourceDirectory: /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc
+BuildDirectory: /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/cmake-build-debug
 
 # Where to place the cost data store
 CostDataFile: 
@@ -36,7 +36,7 @@ ScpCommand: /usr/bin/scp
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake" "/Users/minimumtanaku/Downloads/symcalc-master"
+ConfigureCommand: "/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake" "/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc"
 MakeCommand: /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --build . --config "${CTEST_CONFIGURATION_TYPE}"
 DefaultCTestConfigurationType: Release
 

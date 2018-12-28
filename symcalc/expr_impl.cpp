@@ -5,24 +5,54 @@
 #include <limits>
 
 namespace exprs {
-    exprs::number::number(double number) {num = number;};
+    number::number(double number) {num = number;};
 
-    expr exprs::number::derive(std::string const &variable) const {
+    expr number::derive(std::string const &variable) const {
         return expr::ZERO;
     }
-    bool exprs::number::equals(const expr_base &b) const {
+    bool number::equals(const expr_base &b) const {
         if(const number* v = dynamic_cast<number const*>(b.shared_from_this().get())) {
             return v->num == num;
         }
         return false;
     }
-    void exprs::number::write(std::ostream &out, expr_base::WriteFormat fmt) const {
+    void number::write(std::ostream &out, expr_base::WriteFormat fmt) const {
         out << num;
     }
-    double exprs::number::evaluate(const expr_base::variable_map_t &variables) const {
+    double number::evaluate(const expr_base::variable_map_t &variables) const {
         return num;
     }
-    expr exprs::number::simplify() const {
+    expr number::simplify() const {
+        return shared_from_this();
+    }
+    variable::variable(std::string in) {var = in;};
+
+    expr variable::derive(std::string const &variable) const {
+        if (var == variable){
+            return expr::ONE;
+        }else{
+            return expr::ZERO;
+        }
+    }
+    bool variable::equals(const expr_base &b) const {
+        if(const variable* v = dynamic_cast<variable const*>(b.shared_from_this().get())) {
+            return v->var == var;
+        }
+        return false;
+    }
+    void variable::write(std::ostream &out, expr_base::WriteFormat fmt) const {
+        out << var;
+    }
+    //TODO: check this shieeet, this could produce an error
+    double variable::evaluate(const expr_base::variable_map_t &variables) const {
+        for(auto pair : variables){
+            if(pair.first == var){
+                return pair.second;
+            }
+        }
+        throw unbound_variable_exception("");
+    }
+    expr variable::simplify() const {
         return shared_from_this();
     }
     //PLUS
@@ -78,6 +108,15 @@ namespace exprs {
     expr expr_minus::derive(std::string const &variable) const {
         return std::make_shared<expr_minus>(expr_minus(expr1->derive(variable), expr2->derive(variable)));
     }
+    bool expr_minus::equals(const expr_base &b) const {
+        //get the actual expression from shared pointer
+        const expr_minus* expr = dynamic_cast<expr_minus const*>(b.shared_from_this().get());
+        if (expr1 == expr->expr1 && expr2 == expr->expr2){
+            return true;
+        }else{
+            return false;
+        }
+    }
     void expr_minus::write(std::ostream &out, expr_base::WriteFormat fmt) const {
         if(fmt == expr_base::WriteFormat::Infix){
             out << "(" << expr1 << " - " << expr2 << ")";
@@ -103,5 +142,151 @@ namespace exprs {
         }
         return std::make_shared<expr_minus>(expr_minus(one,two));
     }
+    //MULTIPLY
+    expr_multiply::expr_multiply(const expr & one, const expr &two) {
+        expr1 = one;
+        expr2 = two;
+    }
 
+    double expr_multiply::evaluate(const expr_base::variable_map_t &variables) const {
+        throw std::logic_error("not implemented yet");
+    }
+
+    expr expr_multiply::derive(std::string const &variable) const {
+        throw std::logic_error("not implemented yet");
+    }
+
+    expr expr_multiply::simplify() const {
+        throw std::logic_error("not implemented yet");
+    }
+
+    void expr_multiply::write(std::ostream &out, WriteFormat fmt) const {
+        throw std::logic_error("not implemented yet");
+    }
+
+    bool expr_multiply::equals(const expr_base &b) const {
+        throw std::logic_error("not implemented yet");
+    }
+    //DEVIDE
+    expr_divide::expr_divide(const expr & one, const expr &two) {
+        expr1 = one;
+        expr2 = two;
+    }
+
+    double expr_divide::evaluate(const expr_base::variable_map_t &variables) const {
+        throw std::logic_error("not implemented yet");
+    }
+
+    expr expr_divide::derive(std::string const &variable) const {
+        throw std::logic_error("not implemented yet");
+    }
+
+    expr expr_divide::simplify() const {
+        throw std::logic_error("not implemented yet");
+    }
+
+    void expr_divide::write(std::ostream &out, WriteFormat fmt) const {
+        throw std::logic_error("not implemented yet");
+    }
+
+    bool expr_divide::equals(const expr_base &b) const {
+        throw std::logic_error("not implemented yet");
+    }
+    //POW
+    expr_pow::expr_pow(const expr & one, const expr &two) {
+        expr1 = one;
+        expr2 = two;
+    }
+
+    double expr_pow::evaluate(const expr_base::variable_map_t &variables) const {
+        throw std::logic_error("not implemented yet");
+    }
+
+    expr expr_pow::derive(std::string const &variable) const {
+        throw std::logic_error("not implemented yet");
+    }
+
+    expr expr_pow::simplify() const {
+        throw std::logic_error("not implemented yet");
+    }
+
+    void expr_pow::write(std::ostream &out, WriteFormat fmt) const {
+        throw std::logic_error("not implemented yet");
+    }
+
+    bool expr_pow::equals(const expr_base &b) const {
+        throw std::logic_error("not implemented yet");
+    }
+    //SIN
+    expr_sin::expr_sin(const expr & one) {
+        expr1 = one;
+    }
+
+    double expr_sin::evaluate(const expr_base::variable_map_t &variables) const {
+        throw std::logic_error("not implemented yet");
+    }
+
+    expr expr_sin::derive(std::string const &variable) const {
+        throw std::logic_error("not implemented yet");
+    }
+
+    expr expr_sin::simplify() const {
+        throw std::logic_error("not implemented yet");
+    }
+
+    void expr_sin::write(std::ostream &out, WriteFormat fmt) const {
+        throw std::logic_error("not implemented yet");
+    }
+
+    bool expr_sin::equals(const expr_base &b) const {
+        throw std::logic_error("not implemented yet");
+    }
+    //COS
+    expr_cos::expr_cos(const expr & one) {
+        expr1 = one;
+    }
+
+    double expr_cos::evaluate(const expr_base::variable_map_t &variables) const {
+        throw std::logic_error("not implemented yet");
+    }
+
+    expr expr_cos::derive(std::string const &variable) const {
+        throw std::logic_error("not implemented yet");
+    }
+
+    expr expr_cos::simplify() const {
+        throw std::logic_error("not implemented yet");
+    }
+
+    void expr_cos::write(std::ostream &out, WriteFormat fmt) const {
+        throw std::logic_error("not implemented yet");
+    }
+
+    bool expr_cos::equals(const expr_base &b) const {
+        throw std::logic_error("not implemented yet");
+    }
+    //LOG
+    expr_log::expr_log(const expr & one) {
+        expr1 = one;
+    }
+
+    double expr_log::evaluate(const expr_base::variable_map_t &variables) const {
+        throw std::logic_error("not implemented yet");
+    }
+
+    expr expr_log::derive(std::string const &variable) const {
+        throw std::logic_error("not implemented yet");
+    }
+
+    expr expr_log::simplify() const {
+        throw std::logic_error("not implemented yet");
+    }
+
+    void expr_log::write(std::ostream &out, WriteFormat fmt) const {
+        throw std::logic_error("not implemented yet");
+    }
+
+    bool expr_log::equals(const expr_base &b) const {
+        throw std::logic_error("not implemented yet");
+    }
 } // namespace exprs

@@ -1,58 +1,67 @@
 #include "expr.hpp"
 #include "expr_impl.hpp"
+#include "tokenizer.hpp"
 #include <stdexcept>
-
-
-
-exprs::variable::variable(std::string in) {var = in;};
-
-expr exprs::variable::derive(std::string const &variable) const {
-    if (var == variable){
-        return expr::ONE;
-    }else{
-        return expr::ZERO;
-    }
-}
-bool exprs::variable::equals(const expr_base &b) const {
-    if(const variable* v = dynamic_cast<variable const*>(b.shared_from_this().get())) {
-        return v->var == var;
-    }
-    return false;
-}
-void exprs::variable::write(std::ostream &out, expr_base::WriteFormat fmt) const {
-    out << var;
-}
-//TODO: check this shieeet, this could produce an error
-double exprs::variable::evaluate(const expr_base::variable_map_t &variables) const {
-    for(auto pair : variables){
-        if(pair.first == var){
-            return pair.second;
-        }
-    }
-    throw unbound_variable_exception("");
-}
-expr exprs::variable::simplify() const {
-    return shared_from_this();
+#include <sstream>
+#include <vector>
+expr expr::number(double n) {
+    return std::make_shared<exprs::number>(exprs::number(n));
 }
 
+expr expr::variable(std::string name) {
+    return std::make_shared<exprs::variable>(exprs::variable(name));
+}
 const expr expr::ZERO = expr::number(0.0);
 const expr expr::ONE = expr::number(1.0);
 
-// TODO: overloaded operators +, -, *, /, functions pow, log, sin, cos,
+// TODO:
 //       expr::number, expr::variable, operator==, operator<<,
 //       create_expression_tree
 
 expr create_expression_tree(const std::string& expression) {
-    // TODO
-    throw std::logic_error("not implemented");
+    std::stringstream ss(expression);
+    Tokenizer tokenizer(ss);
+    std::vector<Token> ret;
+    while (1)
+    {
+        Token token = tokenizer.next();
+        ret.push_back(token);
+        if (token.id == TokenId::End){
+            break;
+        }
+    }
 }
 
+//OPERATORS AND FUNCS
 bool operator==(const expr &a, const expr &b) {
-    // TODO
-    throw std::logic_error("not implemented");
+    return a->equals(b->shared_from_this().operator*());
+}
+std::ostream& operator<<(std::ostream &os, const expr &e) {
+    e->write(os,expr::WriteFormat::Infix);
+    return os;
+}
+expr operator+(expr lhs, expr rhs){
+    return std::make_shared<exprs::expr_plus>(exprs::expr_plus(lhs,rhs));
+}
+expr operator-(expr lhs, expr rhs){
+    return std::make_shared<exprs::expr_minus>(exprs::expr_minus(lhs,rhs));
+}
+expr operator*(expr lhs, expr rhs){
+    return std::make_shared<exprs::expr_multiply>(exprs::expr_multiply(lhs,rhs));
+}
+expr operator/(expr lhs, expr rhs){
+    return std::make_shared<exprs::expr_divide>(exprs::expr_divide(lhs,rhs));
+}
+expr pow(expr num, expr exponent){
+    return std::make_shared<exprs::expr_pow>(exprs::expr_pow(num,exponent));
+}
+expr log(expr e){
+    return std::make_shared<exprs::expr_log>(exprs::expr_log(e));
+}
+expr sin(expr e){
+    return std::make_shared<exprs::expr_sin>(exprs::expr_sin(e));
+}
+expr cos(expr e){
+    return std::make_shared<exprs::expr_cos>(exprs::expr_cos(e));
 }
 
-std::ostream& operator<<(std::ostream &os, const expr &e) {
-    // TODO
-    throw std::logic_error("not implemented");
-}

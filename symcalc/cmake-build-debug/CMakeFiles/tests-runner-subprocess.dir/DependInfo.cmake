@@ -4,13 +4,13 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/minimumtanaku/Downloads/symcalc-master/tests/runner_subprocess.cpp" "/Users/minimumtanaku/Downloads/symcalc-master/cmake-build-debug/CMakeFiles/tests-runner-subprocess.dir/tests/runner_subprocess.cpp.o"
-  "/Users/minimumtanaku/Downloads/symcalc-master/tests/subprocess_posix.cpp" "/Users/minimumtanaku/Downloads/symcalc-master/cmake-build-debug/CMakeFiles/tests-runner-subprocess.dir/tests/subprocess_posix.cpp.o"
-  "/Users/minimumtanaku/Downloads/symcalc-master/tests/tests-expr-long.cpp" "/Users/minimumtanaku/Downloads/symcalc-master/cmake-build-debug/CMakeFiles/tests-runner-subprocess.dir/tests/tests-expr-long.cpp.o"
-  "/Users/minimumtanaku/Downloads/symcalc-master/tests/tests-expr.cpp" "/Users/minimumtanaku/Downloads/symcalc-master/cmake-build-debug/CMakeFiles/tests-runner-subprocess.dir/tests/tests-expr.cpp.o"
-  "/Users/minimumtanaku/Downloads/symcalc-master/tests/tests-generated.cpp" "/Users/minimumtanaku/Downloads/symcalc-master/cmake-build-debug/CMakeFiles/tests-runner-subprocess.dir/tests/tests-generated.cpp.o"
-  "/Users/minimumtanaku/Downloads/symcalc-master/tests/tests-main.cpp" "/Users/minimumtanaku/Downloads/symcalc-master/cmake-build-debug/CMakeFiles/tests-runner-subprocess.dir/tests/tests-main.cpp.o"
-  "/Users/minimumtanaku/Downloads/symcalc-master/tests/tests-utils.cpp" "/Users/minimumtanaku/Downloads/symcalc-master/cmake-build-debug/CMakeFiles/tests-runner-subprocess.dir/tests/tests-utils.cpp.o"
+  "/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tests/runner_subprocess.cpp" "/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/cmake-build-debug/CMakeFiles/tests-runner-subprocess.dir/tests/runner_subprocess.cpp.o"
+  "/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tests/subprocess_posix.cpp" "/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/cmake-build-debug/CMakeFiles/tests-runner-subprocess.dir/tests/subprocess_posix.cpp.o"
+  "/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tests/tests-expr-long.cpp" "/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/cmake-build-debug/CMakeFiles/tests-runner-subprocess.dir/tests/tests-expr-long.cpp.o"
+  "/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tests/tests-expr.cpp" "/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/cmake-build-debug/CMakeFiles/tests-runner-subprocess.dir/tests/tests-expr.cpp.o"
+  "/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tests/tests-generated.cpp" "/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/cmake-build-debug/CMakeFiles/tests-runner-subprocess.dir/tests/tests-generated.cpp.o"
+  "/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tests/tests-main.cpp" "/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/cmake-build-debug/CMakeFiles/tests-runner-subprocess.dir/tests/tests-main.cpp.o"
+  "/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tests/tests-utils.cpp" "/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/cmake-build-debug/CMakeFiles/tests-runner-subprocess.dir/tests/tests-utils.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 

@@ -43,10 +43,10 @@ RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/minimumtanaku/Downloads/symcalc-master
+CMAKE_SOURCE_DIR = /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/minimumtanaku/Downloads/symcalc-master/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/cmake-build-debug
 
 # Utility rule file for ContinuousBuild.
 
@@ -71,6 +71,6 @@ CMakeFiles/ContinuousBuild.dir/clean:
 .PHONY : CMakeFiles/ContinuousBuild.dir/clean
 
 CMakeFiles/ContinuousBuild.dir/depend:
-	cd /Users/minimumtanaku/Downloads/symcalc-master/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/minimumtanaku/Downloads/symcalc-master /Users/minimumtanaku/Downloads/symcalc-master /Users/minimumtanaku/Downloads/symcalc-master/cmake-build-debug /Users/minimumtanaku/Downloads/symcalc-master/cmake-build-debug /Users/minimumtanaku/Downloads/symcalc-master/cmake-build-debug/CMakeFiles/ContinuousBuild.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/cmake-build-debug /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/cmake-build-debug /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/cmake-build-debug/CMakeFiles/ContinuousBuild.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ContinuousBuild.dir/depend
 

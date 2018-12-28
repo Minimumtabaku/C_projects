@@ -5,57 +5,58 @@ CMakeFiles/tests-direct.dir/app.cpp.o
  .././mapbox/recursive_wrapper.hpp
  .././mapbox/variant.hpp
  .././mapbox/variant_visitor.hpp
- /Users/minimumtanaku/Downloads/symcalc-master/app.cpp
- /Users/minimumtanaku/Downloads/symcalc-master/cmdline.hpp
- /Users/minimumtanaku/Downloads/symcalc-master/expr.hpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/app.cpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/cmdline.hpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/expr.hpp
 CMakeFiles/tests-direct.dir/cmdline.cpp.o
  .././mapbox/recursive_wrapper.hpp
  .././mapbox/variant.hpp
  .././mapbox/variant_visitor.hpp
- /Users/minimumtanaku/Downloads/symcalc-master/cmdline.cpp
- /Users/minimumtanaku/Downloads/symcalc-master/cmdline.hpp
- /Users/minimumtanaku/Downloads/symcalc-master/expr.hpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/cmdline.cpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/cmdline.hpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/expr.hpp
 CMakeFiles/tests-direct.dir/expr.cpp.o
- /Users/minimumtanaku/Downloads/symcalc-master/expr.cpp
- /Users/minimumtanaku/Downloads/symcalc-master/expr.hpp
- /Users/minimumtanaku/Downloads/symcalc-master/expr_impl.hpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/expr.cpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/expr.hpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/expr_impl.hpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tokenizer.hpp
 CMakeFiles/tests-direct.dir/expr_impl.cpp.o
- /Users/minimumtanaku/Downloads/symcalc-master/expr.hpp
- /Users/minimumtanaku/Downloads/symcalc-master/expr_impl.cpp
- /Users/minimumtanaku/Downloads/symcalc-master/expr_impl.hpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/expr.hpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/expr_impl.cpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/expr_impl.hpp
 CMakeFiles/tests-direct.dir/tests/tests-cmdline.cpp.o
  .././mapbox/recursive_wrapper.hpp
  .././mapbox/variant.hpp
  .././mapbox/variant_visitor.hpp
- /Users/minimumtanaku/Downloads/symcalc-master/cmdline.hpp
- /Users/minimumtanaku/Downloads/symcalc-master/tests/catch.hpp
- /Users/minimumtanaku/Downloads/symcalc-master/tests/tests-cmdline.cpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/cmdline.hpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tests/catch.hpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tests/tests-cmdline.cpp
 CMakeFiles/tests-direct.dir/tests/tests-expr.cpp.o
  .././expr.hpp
  .././mapbox/recursive_wrapper.hpp
  .././mapbox/variant.hpp
  .././mapbox/variant_visitor.hpp
- /Users/minimumtanaku/Downloads/symcalc-master/tests/catch.hpp
- /Users/minimumtanaku/Downloads/symcalc-master/tests/cmdline.hpp
- /Users/minimumtanaku/Downloads/symcalc-master/tests/runner.hpp
- /Users/minimumtanaku/Downloads/symcalc-master/tests/tests-expr.cpp
- /Users/minimumtanaku/Downloads/symcalc-master/tests/tests.hpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tests/catch.hpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tests/cmdline.hpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tests/runner.hpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tests/tests-expr.cpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tests/tests.hpp
 CMakeFiles/tests-direct.dir/tests/tests-main.cpp.o
- /Users/minimumtanaku/Downloads/symcalc-master/tests/catch.hpp
- /Users/minimumtanaku/Downloads/symcalc-master/tests/tests-main.cpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tests/catch.hpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tests/tests-main.cpp
 CMakeFiles/tests-direct.dir/tests/tests-tokenizer.cpp.o
- /Users/minimumtanaku/Downloads/symcalc-master/expr.hpp
- /Users/minimumtanaku/Downloads/symcalc-master/tests/catch.hpp
- /Users/minimumtanaku/Downloads/symcalc-master/tests/tests-tokenizer.cpp
- /Users/minimumtanaku/Downloads/symcalc-master/tokenizer.hpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/expr.hpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tests/catch.hpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tests/tests-tokenizer.cpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tokenizer.hpp
 CMakeFiles/tests-direct.dir/tests/tests-utils.cpp.o
  .././mapbox/recursive_wrapper.hpp
  .././mapbox/variant.hpp
  .././mapbox/variant_visitor.hpp
- /Users/minimumtanaku/Downloads/symcalc-master/tests/cmdline.hpp
- /Users/minimumtanaku/Downloads/symcalc-master/tests/tests-utils.cpp
- /Users/minimumtanaku/Downloads/symcalc-master/tests/tests.hpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tests/cmdline.hpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tests/tests-utils.cpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tests/tests.hpp
 CMakeFiles/tests-direct.dir/tokenizer.cpp.o
- /Users/minimumtanaku/Downloads/symcalc-master/expr.hpp
- /Users/minimumtanaku/Downloads/symcalc-master/tokenizer.cpp
- /Users/minimumtanaku/Downloads/symcalc-master/tokenizer.hpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/expr.hpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tokenizer.cpp
+ /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/tokenizer.hpp

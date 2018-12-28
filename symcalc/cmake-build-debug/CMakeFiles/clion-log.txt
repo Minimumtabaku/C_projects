@@ -1,4 +1,11 @@
-/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/minimumtanaku/Downloads/symcalc-master
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc
+-- The CXX compiler identification is AppleClang 10.0.0.10001044
+-- Check for working CXX compiler: /Library/Developer/CommandLineTools/usr/bin/c++
+-- Check for working CXX compiler: /Library/Developer/CommandLineTools/usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: /Users/minimumtanaku/Downloads/symcalc-master/cmake-build-debug
+-- Build files have been written to: /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/cmake-build-debug

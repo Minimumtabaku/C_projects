@@ -6,5 +6,5 @@ CXX_FLAGS = -g   -std=c++14
 
 CXX_DEFINES = -DRUNNER
 
-CXX_INCLUDES = -I/Users/minimumtanaku/Downloads/symcalc-master/. 
+CXX_INCLUDES = -I/Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/. 
 

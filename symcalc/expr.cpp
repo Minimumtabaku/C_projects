@@ -3,7 +3,9 @@
 #include "tokenizer.hpp"
 #include <stdexcept>
 #include <sstream>
-#include <vector>
+#include <stack>
+#include <queue>
+#include <iostream>
 expr expr::number(double n) {
     return std::make_shared<exprs::number>(exprs::number(n));
 }
@@ -19,17 +21,52 @@ const expr expr::ONE = expr::number(1.0);
 //       create_expression_tree
 
 expr create_expression_tree(const std::string& expression) {
+    std::queue<Token> queue;
+    std::stack<Token> stack;
+
     std::stringstream ss(expression);
     Tokenizer tokenizer(ss);
-    std::vector<Token> ret;
-    while (1)
-    {
+    while (1) {
         Token token = tokenizer.next();
-        ret.push_back(token);
+
         if (token.id == TokenId::End){
             break;
         }
+        else if(token.id == TokenId::Number){
+            queue.push(token);
+        }
+        else if (token.id == TokenId::Identifier){
+            stack.push(token);
+        }
+        else if (token.id == TokenId::LParen){
+            stack.push(token);
+        }
+        else if (token.id == TokenId::RParen){
+            //TODO: heck if this is not endless loop
+            while (stack.top().id != TokenId::LParen){
+                queue.push(stack.top());
+                stack.pop();
+            }
+            //this should get rid of the last thing: LBracket
+            stack.pop();
+        }
+        //this is basically checking for the operators
+        else{
+            while (stack.top().id == TokenId::Identifier || stack.top().op_precedence() > token.op_precedence() && stack.top().id != TokenId::LParen){
+                queue.push(stack.top());
+                stack.pop();
+            }
+            stack.push(token);
+        }
     }
+
+    std::cout << 'printing content of queue' ;
+    while(!queue.empty()){
+        std::cout << ';;;' << queue.front();
+        queue.pop();
+    }
+    std::cout << std::endl;
+    return log(expr::number(10));
 }
 
 //OPERATORS AND FUNCS

@@ -64,7 +64,7 @@ expr calculate_result_from_queue(std::queue<Token> rpnQueue){
 
                 }
                 //TODO: get rid of this shit, make a tempalte func
-            }else if (symbols.size() < 2 && expressions.size() > 0){
+            }else if (symbols.size() < 2 && expressions.size() >= 2){
                 expr x = expressions.top(); expressions.pop();
                 expr y = expressions.top(); expressions.pop();
                 //TODO: opacne x a y
@@ -95,7 +95,41 @@ expr calculate_result_from_queue(std::queue<Token> rpnQueue){
                             throw "undefined function identifier from calculate func";
                         }
                 }
-            }else{
+            }else if (symbols.size() < 2 && expressions.size() < 2) {
+                expr x = expr::number(symbols.top().number);
+                symbols.pop();
+                expr y = expressions.top();
+                expressions.pop();
+                //TODO: opacne x a y
+                switch (symbol.id) {
+                    case TokenId::Plus:
+                        expressions.push(x + y);
+                        break;
+                    case TokenId::Minus:
+                        expressions.push(x - y);
+                        break;
+                    case TokenId::Divide:
+                        expressions.push(x / y);
+                        break;
+                    case TokenId::Multiply:
+                        expressions.push(x * y);
+                        break;
+                    case TokenId::Power:
+                        expressions.push(pow(x, y));
+                        break;
+                    case TokenId::Identifier:
+                        if (symbol.identifier.compare("cos") == 0) {
+                            throw "undefined function identifier from calculate func";
+                        } else if (symbol.identifier.compare("sin") == 0) {
+                            throw "undefined function identifier from calculate func";
+                        } else if (symbol.identifier.compare("log") == 0) {
+                            throw "undefined function identifier from calculate func";
+                        } else {
+                            throw "undefined function identifier from calculate func";
+                        }
+                }
+            }
+            else{
                 throw "error in calculate func";
             }
         }else{

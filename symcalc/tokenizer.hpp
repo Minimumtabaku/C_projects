@@ -42,6 +42,7 @@ struct Token
 
     bool is_binary_op() const;
     int op_precedence() const;
+    bool is_function() const;
     Associativity associativity() const;
 };
 

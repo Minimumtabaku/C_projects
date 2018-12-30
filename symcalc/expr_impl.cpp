@@ -73,17 +73,7 @@ namespace exprs {
         }
     }
     void expr_plus::write(std::ostream &out, expr_base::WriteFormat fmt) const {
-        if(fmt == expr_base::WriteFormat::Infix){
-            out << "(" << expr1 << " + " << expr2 << ")";
-        } else if(fmt == expr_base::WriteFormat::Postfix){
-            out << "(";
-            out << expr1;
-            out << " ";
-            out << expr2;
-            out << " +)";
-        } else {
-            out << "(+ " << expr1 << " " << expr2 << ")";
-        }
+        out << "(+ " << expr1 << " " << expr2 << ")" ;
     }
     double expr_plus::evaluate(const expr_base::variable_map_t &variables) const {
         return expr1->evaluate(variables) + expr2->evaluate(variables);
@@ -95,7 +85,7 @@ namespace exprs {
        if (one == expr::ZERO){
            return two;
        }
-       if(two == expr::ONE){
+       if(two == expr::ZERO){
            return one;
        }
        return std::make_shared<expr_plus>(expr_plus(one,two));
@@ -118,17 +108,7 @@ namespace exprs {
         }
     }
     void expr_minus::write(std::ostream &out, expr_base::WriteFormat fmt) const {
-        if(fmt == expr_base::WriteFormat::Infix){
-            out << "(" << expr1 << " - " << expr2 << ")";
-        } else if(fmt == expr_base::WriteFormat::Postfix){
-            out << "(";
-            out << expr1;
-            out << " ";
-            out << expr2;
-            out << " -)";
-        } else {
-            out << "(- " << expr1 << " " << expr2 << ")";
-        }
+        out << "(- " << expr1 << " " << expr2 << ")" ;
     }
     double expr_minus::evaluate(const expr_base::variable_map_t &variables) const {
         return expr1->evaluate(variables) - expr2->evaluate(variables);
@@ -149,23 +129,43 @@ namespace exprs {
     }
 
     double expr_multiply::evaluate(const expr_base::variable_map_t &variables) const {
-        throw std::logic_error("not implemented yet");
+        return expr1->evaluate(variables) * expr2->evaluate(variables);
     }
 
     expr expr_multiply::derive(std::string const &variable) const {
-        throw std::logic_error("not implemented yet");
+//        throw std::logic_error("not implemented yet");
+        return std::make_shared<expr_plus>((expr1->derive(variable) * expr2) , (expr1*expr2->derive(variable)));
     }
 
     expr expr_multiply::simplify() const {
-        throw std::logic_error("not implemented yet");
+        expr one = expr1->simplify();
+        expr two = expr2->simplify();
+
+        if(one == expr::ZERO || two == expr::ZERO){
+            return expr::ZERO;
+        }
+        if (one == expr::ONE){
+            return two;
+        }
+        if (two == expr::ONE){
+            return one;
+        }
+
+        return std::make_shared<expr_multiply>(one , two);
     }
 
     void expr_multiply::write(std::ostream &out, WriteFormat fmt) const {
-        throw std::logic_error("not implemented yet");
+        out << "(" << "* " << expr1 <<" "  << expr2 << ")";
     }
 
     bool expr_multiply::equals(const expr_base &b) const {
-        throw std::logic_error("not implemented yet");
+//        throw std::logic_error("not implemented yet");
+        const expr_multiply* exprMultiply = dynamic_cast<expr_multiply const*>(b.shared_from_this().get());
+        //cast wasnt successful
+        if (exprMultiply == nullptr){
+            return false;
+        }
+        return expr1 == exprMultiply->expr1 && expr2 == exprMultiply->expr2;
     }
     //DEVIDE
     expr_divide::expr_divide(const expr & one, const expr &two) {
@@ -186,7 +186,7 @@ namespace exprs {
     }
 
     void expr_divide::write(std::ostream &out, WriteFormat fmt) const {
-        throw std::logic_error("not implemented yet");
+        out << "(/ " << expr1 << " " << expr2 << ")";
     }
 
     bool expr_divide::equals(const expr_base &b) const {
@@ -211,7 +211,7 @@ namespace exprs {
     }
 
     void expr_pow::write(std::ostream &out, WriteFormat fmt) const {
-        throw std::logic_error("not implemented yet");
+        out << "(^ " << expr1 << " "  << expr2 << ")";
     }
 
     bool expr_pow::equals(const expr_base &b) const {
@@ -235,7 +235,7 @@ namespace exprs {
     }
 
     void expr_sin::write(std::ostream &out, WriteFormat fmt) const {
-        throw std::logic_error("not implemented yet");
+        out << "(sin " << expr1 << ")";
     }
 
     bool expr_sin::equals(const expr_base &b) const {
@@ -259,7 +259,7 @@ namespace exprs {
     }
 
     void expr_cos::write(std::ostream &out, WriteFormat fmt) const {
-        throw std::logic_error("not implemented yet");
+        out << "(cos " << expr1 << ")";
     }
 
     bool expr_cos::equals(const expr_base &b) const {
@@ -283,7 +283,7 @@ namespace exprs {
     }
 
     void expr_log::write(std::ostream &out, WriteFormat fmt) const {
-        throw std::logic_error("not implemented yet");
+        out << "(log " << expr1 << ")";
     }
 
     bool expr_log::equals(const expr_base &b) const {

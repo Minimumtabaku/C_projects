@@ -17,6 +17,12 @@ stdexcept
 -
 sstream
 -
+stack
+-
+queue
+-
+iostream
+-
 
 /Users/minimumtanaku/Documents/GitHub/C_projects/symcalc/expr.hpp
 iosfwd

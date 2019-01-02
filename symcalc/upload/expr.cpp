@@ -80,7 +80,7 @@ expr calculate_result_from_queue(std::queue<Token> rpnQueue) {
         // inputs like ""variable, aaa, bleh"
         if (!symbol.is_function() && symbol.id == TokenId::Identifier) {
             symbols.push(symbol);
-            counter++;
+
         } else if (symbol.id != TokenId::Number || symbol.is_function()) {
             // cos, sin, log
             if (symbol.is_function()) {
@@ -150,22 +150,12 @@ expr calculate_result_from_queue(std::queue<Token> rpnQueue) {
                     expressions.push(apply_token(symbol, x, y));
                     counter--;
                 } else if (symbols.size() != 2 && expressions.size() >= 1) {
-                    if (rpnQueue.empty() && counter %2 == 0){
-                        x = check_id(symbols.top());
-                        symbols.pop();
-                        y = expressions.top();
-                        expressions.pop();
-                        expressions.push(apply_token(symbol, x, y));
-                        counter--;
-                    }else{
-                        y = check_id(symbols.top());
-                        symbols.pop();
-                        x = expressions.top();
-                        expressions.pop();
-                        expressions.push(apply_token(symbol, x, y));
-                        counter--;
-                    }
-
+                    y = expr::number(symbols.top().number);
+                    symbols.pop();
+                    x = expressions.top();
+                    expressions.pop();
+                    expressions.push(apply_token(symbol, x, y));
+                    counter--;
                 } else {
                     throw "error in calculate func";
                 }
@@ -193,9 +183,7 @@ expr calculate_result_from_queue(std::queue<Token> rpnQueue) {
                 break;
             } else if (token.id == TokenId::Number) {
                 queue.push(token);
-            } else if (token.id == TokenId::Identifier && !token.is_function()) {
-                queue.push(token);
-            }else if (token.is_function()) {
+            } else if (token.id == TokenId::Identifier) {
                 stack.push(token);
             } else if (token.id == TokenId::LParen) {
                 stack.push(token);
@@ -209,11 +197,12 @@ expr calculate_result_from_queue(std::queue<Token> rpnQueue) {
             }
                 //this is basically checking for the operators
             else {
-                while (stack.size() > 0 && (stack.top().is_function()
-                || (stack.top().is_binary_op() && stack.top().op_precedence() > token.op_precedence())
-                || (stack.top().is_binary_op() && stack.top().op_precedence() >= token.op_precedence()
-                && stack.top().associativity() == Associativity::Left))
-                && stack.top().id != TokenId::LParen) {
+                while (stack.size() > 0 && stack.top().is_binary_op() &&
+                       (stack.top().id == TokenId::Identifier || (stack.top().op_precedence() > token.op_precedence())
+                        || (stack.top().op_precedence() >= token.op_precedence() &&
+                            stack.top().associativity() == Associativity::Left)
+                           && stack.top().id != TokenId::LParen)) {
+
                     queue.push(stack.top());
                     stack.pop();
                 }
@@ -226,7 +215,7 @@ expr calculate_result_from_queue(std::queue<Token> rpnQueue) {
             stack.pop();
         }
         //now we have a queue of symbols in RPN, we have to calculate the result and return expression containg other expressions
-//    std::cout << "printing content of queue" ;
+//    std::cout << 'printing content of queue' ;
 //    while(!queue.empty()){
 //        std::cout << ";;;" << queue.front();
 //        queue.pop();

@@ -4,8 +4,15 @@
 #include <expr.hpp>
 int main(int argc, char *argv[])
 {
-    std::string test = "(1+(((sin(x)))))";
-    auto what =  create_expression_tree(test);
-    std::cout << what << std::endl;
+    std::vector<Commands::Command> commands(argc-1);
+    for(int i = 0; i < argc-1; i++){
+        commands[i] = parse_command(argv[i+1]);
+    }
+
+    std::string line;
+    while (getline(std::cin, line)) {
+            handle_expr_line(std::cout, line, commands);
+    }
+
     return 0;
 }

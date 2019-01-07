@@ -11,22 +11,21 @@ void process_expr(std::ostream &os, expr initial_expr, vector<Commands::Command>
         using namespace Commands;
         cmd.match(
             [&](Commands::Derive const &derive) {
-                e = e->derive(derive.variable);
+                // TODO
             },
             [&](Commands::Simplify const &) {
-                e = e->simplify();
+                // TODO
             },
             [&](Commands::Evaluate const &evaluate) {
-                os << e->evaluate(evaluate.variables) << std::endl;
+                // TODO
             },
             [&](Commands::Print const &p) {
-                os << e << std::endl;
+                // TODO
             }
         );
     }
 }
 
 void handle_expr_line(std::ostream &os, std::string const &line, vector<Commands::Command> const &commands) {
-    expr e = create_expression_tree(line);
-    process_expr(os, e, commands);
+    // TODO
 }

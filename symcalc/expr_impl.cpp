@@ -208,6 +208,10 @@ namespace exprs {
         expr one = expr1->simplify();
         expr two = expr2->simplify();
 
+        if (one == expr::ZERO && two == expr::ZERO){
+            return std::make_shared<exprs::expr_divide>(expr_divide(one,two));
+        }
+
         if (one == expr::ZERO){
             return expr::ZERO;
         }
@@ -243,10 +247,19 @@ namespace exprs {
         expr one = expr1->simplify();
         expr two = expr2->simplify();
 
+        if ((one == expr::ZERO && two == expr::ZERO) || (two == expr::ZERO)){
+            return expr::ONE;
+        }
         if (two == expr::ZERO){
             return one;
         }
-        if ()
+        if (one == expr::ZERO){
+            return expr::ZERO;
+        }
+        if (two == expr::ONE){
+            return one;
+        }
+        return std::make_shared<exprs::expr_pow>(expr_pow(one,two));
     }
 
     void expr_pow::write(std::ostream &out, WriteFormat fmt) const {
@@ -271,7 +284,8 @@ namespace exprs {
     }
 
     expr expr_sin::simplify() const {
-        throw std::logic_error("not implemented yet");
+        expr one = expr1->simplify();
+        return std::make_shared<exprs::expr_sin>(expr_sin(one));
     }
 
     void expr_sin::write(std::ostream &out, WriteFormat fmt) const {
@@ -296,7 +310,8 @@ namespace exprs {
     }
 
     expr expr_cos::simplify() const {
-        throw std::logic_error("not implemented yet");
+        expr one = expr1->simplify();
+        return std::make_shared<exprs::expr_cos>(expr_cos(one));
     }
 
     void expr_cos::write(std::ostream &out, WriteFormat fmt) const {
@@ -321,7 +336,11 @@ namespace exprs {
     }
 
     expr expr_log::simplify() const {
-        throw std::logic_error("not implemented yet");
+        expr one = expr1->simplify();
+        if (one == expr::ONE){
+            return expr::ZERO;
+        }
+        return std::make_shared<exprs::expr_log>(expr_log(one));
     }
 
     void expr_log::write(std::ostream &out, WriteFormat fmt) const {
@@ -329,6 +348,9 @@ namespace exprs {
     }
 
     bool expr_log::equals(const expr_base &b) const {
-        throw std::logic_error("not implemented yet");
+        if(const expr_log* v = dynamic_cast<expr_log const*>(b.shared_from_this().get())) {
+            return v->expr1 == expr1;
+        }
+        return false;
     }
 } // namespace exprs

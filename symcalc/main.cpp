@@ -11,7 +11,12 @@ int main(int argc, char *argv[])
 
     std::string line;
     while (getline(std::cin, line)) {
+        try {
             handle_expr_line(std::cout, line, commands);
+        }
+        catch(...){
+            std::cout << "exception was caught" << std::endl;
+        }
     }
 
     return 0;

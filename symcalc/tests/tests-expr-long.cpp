@@ -50,7 +50,7 @@ TEST_CASE("Complex: print", "[.long][parse_write][valid]") {
     CHECK(r.code == 0);
     INFO("Commands: " << fmt_range(cmd.commands, " "));
     {
-        //INFO("Output: " << fmt_range(res, "\n"));
+//        INFO("Output: " << fmt_range(r, "\n"));
         CHECK(r.lines.size() == r.expected.size());
     }
     if (r.lines.size() == r.expected.size()) {

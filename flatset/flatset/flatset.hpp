@@ -1,3 +1,4 @@
+#pragma once
 
 #include <iostream>
 #include <cstdlib>
@@ -44,9 +45,22 @@ public:
     
     // Vloží prvek do setu, buďto pomocí kopie, nebo pomocí přesunu.
     std::pair<iterator, bool> insert(T const& v){
-        std::cout << "asda" << std::endl;
+        iterator lowerBound = flat_set::lower_bound(v);
+        if (lowerBound == end() && !m_comp(*lowerBound,v)) {
+            return std::pair<iterator, bool>(end(),false);
+        }else{
+            //TODO: probably something different from lowerBound
+            return std::pair<iterator,bool>(m_data.insert(lowerBound, v),true);
+        }
     }
-    std::pair<iterator, bool> insert(T&& v);
+    std::pair<iterator, bool> insert(T&& v){
+        iterator lowerBound = flat_set::lower_bound(v);
+        if (lowerBound == end() && !m_comp(*lowerBound,v)) {
+            return std::pair<iterator, bool>(end(),false);
+        }else{
+            return std::pair<iterator,bool>(m_data.insert(lowerBound, v),true);
+        }
+    }
     // Vloží prvky z [first, last), alokuje pouze jednou pokud je to možné
     template <typename InputIterator>
     void insert(InputIterator first, InputIterator last){
@@ -64,12 +78,30 @@ public:
     size_type erase(value_type const& key);
     
     // Běžné funkce k vytvoření iterátorů
-    iterator begin() noexcept;
-    iterator end() noexcept;
-    const_iterator begin() const noexcept;
-    const_iterator end() const noexcept;
-    const_iterator cbegin() const noexcept;
-    const_iterator cend() const noexcept;
+    iterator begin() noexcept{
+        iterator it = m_data.begin();
+        return it;
+    }
+    iterator end() noexcept{
+        iterator it = m_data.end();
+        return it;
+    }
+    const_iterator begin() const noexcept{
+        const_iterator cit = m_data.begin();
+        return cit;
+    }
+    const_iterator end() const noexcept{
+        const_iterator cit = m_data.end();
+        return cit;
+    }
+    const_iterator cbegin() const noexcept{
+        const_iterator cit = m_data.cbegin();
+        return cit;
+    }
+    const_iterator cend() const noexcept{
+        const_iterator cit = m_data.cend();
+        return cit;
+    }
     
     bool empty() const{
         return m_data.empty();
@@ -83,41 +115,45 @@ public:
     
     // Zajistí, aby se do instance flat_setu dalo vložit c prvků
     // aniž by byla potřeba realokace
-    void reserve(size_type c);
+    void reserve(size_type c){
+        m_data.reserve(c);
+    }
     
     // Vymaže všechny prvky ze setu
-    void clear();
+    void clear(){
+        m_data.clear();
+    }
     
     // Vrátí iterátor ukazující na prvek ekvivalentní s v, nebo end(),
     // pokud takový prvek není uvnitř setu
-    iterator find(T const& v);
+    iterator find(T const& v){
+        iterator it = m_data.begin();
+        while (it != end()) {
+            if (*it == v) {
+                return it;
+            }
+        }
+        return end();
+    }
     const_iterator find(T const& v) const;
     
     // Vrátí iterátor k prvnímu prvku, který není menší nežli t,
     // nebo end() pokud takový prvek neexistuje.
     iterator lower_bound(T const& t){
-        typename std::vector<T>::iterator it = m_data.begin();
-        while (it != m_data.end()) {
-            if(*it == t){
-                return it;
-            }
-        }
-        return m_data.end();
+        return std::lower_bound(begin(), end(), t);
     }
     const_iterator lower_bound(T const& t) const{
-        typename std::vector<T>::const_iterator it = m_data.cbegin();
-        while (it != m_data.cend()) {
-            if(*it == t){
-                return it;
-            }
-        }
-        return m_data.cend();
+        return std::lower_bound(begin(), end(), t);
     }
     
     // Vrátí iterátor k prvnímu prvku, který je větší nežli t,
     // nebo end() pokud takový prvek neexistuje.
-    iterator upper_bound(T const& t);
-    const_iterator upper_bound(T const& t) const;
+    iterator upper_bound(T const& t){
+        return std::upper_bound(begin(), end(), t);
+    }
+    const_iterator upper_bound(T const& t) const{
+        return std::upper_bound(begin(), end(), t);
+    }
     
     // Prohodí obsah dvou setů (včetně komparátoru)
     void swap(flat_set& o);

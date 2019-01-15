@@ -68,14 +68,33 @@ public:
     }
     
     // Smaže prvek na který ukazuje i, vrátí iterátor k dalšímu prvku
-    iterator erase(const_iterator i);
+    iterator erase(const_iterator i){
+        auto ret = flat_set::find(*i);
+        m_data.erase(i);
+        return ret;
+    }
     // Smaže všechny prvky z [from, to), vrátí iterátor k dalšímu prvku
-    iterator erase(const_iterator from, const_iterator to);
+    iterator erase(const_iterator from, const_iterator to){
+        m_data.erase(from, to);
+        auto ret = flat_set::find(*to);
+        return ++ret;
+    }
     // Iterátory předané dovnitř erase odkazují dovnitř setu.
     
     // Smaže prvek rovný klíči pokud existuje.
     // Vrátí kolik prvků bylo smazáno
-    size_type erase(value_type const& key);
+    size_type erase(value_type const& key){
+        size_type ret = 0;
+        iterator it = begin();
+        while (it != end()) {
+            if (*it == key) {
+                erase(it);
+                ret++;
+            }
+            it++;
+        }
+        return ret;
+    }
     
     // Běžné funkce k vytvoření iterátorů
     iterator begin() noexcept{
@@ -132,10 +151,20 @@ public:
             if (*it == v) {
                 return it;
             }
+            it++;
         }
         return end();
     }
-    const_iterator find(T const& v) const;
+    const_iterator find(T const& v) const{
+        const_iterator cit = m_data.begin();
+        while (cit != end()) {
+            if (*cit == v) {
+                return cit;
+            }
+            cit++;
+        }
+        return end();
+    }
     
     // Vrátí iterátor k prvnímu prvku, který není menší nežli t,
     // nebo end() pokud takový prvek neexistuje.

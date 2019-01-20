@@ -1,4 +1,4 @@
-#include "flatset.hpp"
+
 #include "tests-helpers.hpp"
 #include "catch.hpp"
 
@@ -13,6 +13,7 @@
 #include <cmath>
 #include <functional>
 #include <numeric>
+#include "flatset.hpp"
 
 namespace {
     template <typename T>

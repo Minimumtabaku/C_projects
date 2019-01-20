@@ -1,6 +1,5 @@
 #pragma once
 
-#include <iostream>
 #include <cstdlib>
 #include <iterator>
 #include <utility>
@@ -10,7 +9,6 @@
 
 template <typename T, typename Comparator = std::less<T>>
 class flat_set {
-    
 private:
     std::vector<T> m_data;
     Comparator m_comp;
@@ -75,25 +73,20 @@ public:
     }
     // Smaže všechny prvky z [from, to), vrátí iterátor k dalšímu prvku
     iterator erase(const_iterator from, const_iterator to){
-        m_data.erase(from, to);
-        auto ret = flat_set::find(*to);
-        return ++ret;
+        return m_data.erase(from, to);
     }
     // Iterátory předané dovnitř erase odkazují dovnitř setu.
     
     // Smaže prvek rovný klíči pokud existuje.
     // Vrátí kolik prvků bylo smazáno
     size_type erase(value_type const& key){
-        size_type ret = 0;
-        iterator it = begin();
-        while (it != end()) {
-            if (*it == key) {
-                erase(it);
-                ret++;
-            }
-            it++;
+        auto it = find(key);
+        if (it != end()) {
+            m_data.erase(it);
+            return 1;
+        }else{
+            return 0;
         }
-        return ret;
     }
     
     // Běžné funkce k vytvoření iterátorů
@@ -145,25 +138,26 @@ public:
     
     // Vrátí iterátor ukazující na prvek ekvivalentní s v, nebo end(),
     // pokud takový prvek není uvnitř setu
-    iterator find(T const& v){
-        iterator it = m_data.begin();
-        while (it != end()) {
-            if (*it == v) {
-                return it;
-            }
-            it++;
+     iterator find(T const& v){
+        //using binary search algorithm
+        auto it = flat_set::lower_bound(v);
+        
+        if(it != end()){
+            //return iterator pointing to the index of equal or smaller element
+            return it;
+        }else{
+            return end();
         }
-        return end();
     }
+    
     const_iterator find(T const& v) const{
-        const_iterator cit = m_data.begin();
-        while (cit != end()) {
-            if (*cit == v) {
-                return cit;
-            }
-            cit++;
+        auto it = flat_set::lower_bound(v);
+        
+        if(it != end()){
+            //return ilerator pointing to the index of equal or smaller element
+        }else{
+            return end();
         }
-        return end();
     }
     
     // Vrátí iterátor k prvnímu prvku, který není menší nežli t,

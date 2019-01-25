@@ -22,7 +22,7 @@ namespace {
     }
 
     class MyKey {
-        friend struct MyKeyComparator;
+        friend struct MyKeyCompearator;
         int i;
         static unsigned s_nconstructs;
         operator int() const {return i;}

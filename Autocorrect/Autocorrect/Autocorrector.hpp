@@ -20,13 +20,11 @@
 class autocorrector{
 public:
     autocorrector();
-    autocorrector(const std::vector<std::string>&);
     const size_t getDistance(const std::string&, const std::string&) const;
     std::vector<std::string> correct(std::string& word);
 private:
-    const std::string pathToDictionary = "words.txt";
+    const std::string pathToDictionary = "engmix.txt";
     std::map<char, std::set<std::string>> m_dictionary;
-//    std::vector<std::string> m_dictionary;
     std::map<char, std::set<std::string>> loadWords(std::string pathToFile);
     
 };

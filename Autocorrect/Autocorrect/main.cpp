@@ -12,9 +12,15 @@
 int main(int argc, const char * argv[]) {
     autocorrector ac = autocorrector();
     
-    std::string test = "man";
-    for (auto x : ac.correct(test)) {
-        std::cout << x << std::endl;
+    std::string test = "Bostin";
+    auto ret = ac.correct(test);
+    if (ret.size() == 0) {
+        std::cout << "\033nothing to see here, move along\033" << std::endl;
+    }else{
+        for (auto x : ac.correct(test)) {
+            std::cout << x << std::endl;
+        }
     }
+   
     return 0;
 }

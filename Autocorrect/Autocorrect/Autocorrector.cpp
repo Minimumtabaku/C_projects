@@ -90,7 +90,7 @@ std::vector<std::string> autocorrector::correct(std::string &word){
     }else{
         //iterating through the set of words
         auto it2 = (*it).second.begin();
-        size_t maxDistance = word.length();
+        size_t maxDistance = 3;
         
         while (it2 != (*it).second.end()) {
             size_t actualDistance = getDistance(word, *it2);
@@ -98,8 +98,12 @@ std::vector<std::string> autocorrector::correct(std::string &word){
                 possibleWords.clear();
                 return possibleWords;
             }
-            if (actualDistance <= maxDistance) {
+            else if (actualDistance < maxDistance) {
                 maxDistance = actualDistance;
+                possibleWords.clear();
+                possibleWords.push_back(*it2);
+            }
+            else if(actualDistance == maxDistance){
                 possibleWords.push_back(*it2);
             }
             it2++;
@@ -107,4 +111,6 @@ std::vector<std::string> autocorrector::correct(std::string &word){
     }
     return possibleWords;
 }
+
+
 

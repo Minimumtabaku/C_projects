@@ -33,39 +33,15 @@ int main(int argc, const char * argv[]) {
     
     for (auto word : words) {
         auto ret = ac.correctWord(word);
-        std::stack<std::string> temp{ {ret.begin(),ret.end()} } ;
-        results.push_back(temp);
-    }
-    int count = 0;
-    int counter = 0;
-    while (true) {
-        if (count == results.size()) {
-            break;
-        }else{
-            count = 0;
-        }
-        
-        for (auto it = results.begin(); it != results.end() ; it++, counter++) {
-        
-            if ((*it).size() == 0) {
-                std::cout << utils::makeWhitespaces(wordsPunc[counter].length() + 1) ;
-                count++;
-            }else{
-                std::cout << (*it).top() << " ";
-                (*it).pop();
+        if (ret.size() == 0) {
+            std::cout << word << std::endl;
+        } else {
+            std::cout << word << " corrections: ";
+            for (auto correction : ret) {
+                std::cout << correction << " ";
             }
-            //last element
-            
-            if (std::next(it) == results.end()) {
-                std::cout << std::endl;
-            }
-            
+            std::cout << std::endl;
         }
     }
-   
-    
-    
-    
-//
     return 0;
 }

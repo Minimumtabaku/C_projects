@@ -80,7 +80,7 @@ std::map<char,std::set<std::string>> autocorrector::loadWords(const std::string 
     return letterToWordMap;
 }
 
-std::vector<std::string> autocorrector::correct(std::string &word){
+std::vector<std::string> autocorrector::correctWord(std::string &word){
     char firstLetter = word[0];
     auto it = m_dictionary.find(firstLetter);
     std::vector<std::string> possibleWords;
@@ -111,6 +111,5 @@ std::vector<std::string> autocorrector::correct(std::string &word){
     }
     return possibleWords;
 }
-
 
 

@@ -14,16 +14,19 @@
 #include <vector>
 #include <map>
 #include <set>
-
+#include <future>
 
 
 class autocorrector{
+    
 public:
+    using vectorOfWords = std::vector<std::string>;
     autocorrector();
     const size_t getDistance(const std::string&, const std::string&) const;
     const size_t getDistance2(const std::string&, const std::string&) const;
-    std::vector<std::string> correctWord(std::string& word);
-    std::vector<std::string> correctWord2(std::string& word);
+    vectorOfWords correctWord(std::string& word);
+    vectorOfWords correctWord2(std::string& word);
+    void correctWordParallel(std::string& word, std::promise<vectorOfWords> promise);
     static void removePunctuation(std::string& word);
 private:
     const std::string pathToDictionary = "engmix.txt";

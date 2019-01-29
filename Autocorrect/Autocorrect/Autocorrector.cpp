@@ -13,6 +13,51 @@ autocorrector::autocorrector(){
     m_dictionary = loadWords(pathToDictionary);
 }
 
+const size_t autocorrector::getDistance2(const std::string & originalWord, const std::string & compareTo) const {
+    const int _maxOffset = 3;
+    const size_t m(originalWord.length());
+    const size_t n(compareTo.length());
+    
+    if( m==0 ) return n;
+    if( n==0 ) return m;
+    
+    int c = 0;
+    int offset1 = 0;
+    int offset2 = 0;
+    int lcs = 0;
+    while ((c + offset1 < originalWord.length())
+           && (c + offset2 < compareTo.length()))
+    {
+        if (originalWord[c + offset1] == compareTo[c + offset2]) lcs++;
+        else
+        {
+            offset1 = 0;
+            offset2 = 0;
+            if (originalWord[c] == compareTo[c])
+            {
+                c++;
+                continue;
+            }
+            for (int i = 1; i < _maxOffset; i++)
+            {
+                if ((c + i < originalWord.length())
+                    && (originalWord[c + i] == compareTo[c]))
+                {
+                    offset1 = i;
+                    break;
+                }
+                if ((c + i < compareTo.length())
+                    && (originalWord[c] == compareTo[c + i]))
+                {
+                    offset2 = i;
+                    break;
+                }
+            }
+        }
+        c++;
+    }
+    return (originalWord.length() + compareTo.length())/2 - lcs;
+}
 
 const size_t autocorrector::getDistance(const std::string & originalWord, const std::string & compareTo) const{
     const size_t m(originalWord.length());
@@ -94,6 +139,37 @@ std::vector<std::string> autocorrector::correctWord(std::string &word){
         
         while (it2 != (*it).second.end()) {
             size_t actualDistance = getDistance(word, *it2);
+            if (actualDistance == 0){
+                possibleWords.clear();
+                return possibleWords;
+            }
+            else if (actualDistance < maxDistance) {
+                maxDistance = actualDistance;
+                possibleWords.clear();
+                possibleWords.push_back(*it2);
+            }
+            else if(actualDistance == maxDistance){
+                possibleWords.push_back(*it2);
+            }
+            it2++;
+        }
+    }
+    return possibleWords;
+}
+std::vector<std::string> autocorrector::correctWord2(std::string &word){
+    char firstLetter = word[0];
+    auto it = m_dictionary.find(firstLetter);
+    std::vector<std::string> possibleWords;
+    if (it == m_dictionary.end()) {
+        //throw exeption
+        ;
+    }else{
+        //iterating through the set of words
+        auto it2 = (*it).second.begin();
+        size_t maxDistance = 3;
+        
+        while (it2 != (*it).second.end()) {
+            size_t actualDistance = getDistance2(word, *it2);
             if (actualDistance == 0){
                 possibleWords.clear();
                 return possibleWords;

@@ -21,7 +21,9 @@ class autocorrector{
 public:
     autocorrector();
     const size_t getDistance(const std::string&, const std::string&) const;
+    const size_t getDistance2(const std::string&, const std::string&) const;
     std::vector<std::string> correctWord(std::string& word);
+    std::vector<std::string> correctWord2(std::string& word);
     static void removePunctuation(std::string& word);
 private:
     const std::string pathToDictionary = "engmix.txt";

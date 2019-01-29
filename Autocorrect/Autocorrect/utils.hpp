@@ -15,7 +15,10 @@ public:
      *Function to erase punctuation. Remove doesn't reallocate, so you have to use it accompanied by string::eraase method.
      */
     static void removePunctuation(std::string &word){
-        word.erase (std::remove_if (word.begin (), word.end (), ispunct), word.end ());
+        auto pred = [](char c){
+            return c != '\'' && !isalpha(c);
+        };
+        word.erase (std::remove_if (word.begin (), word.end (), pred), word.end ());
     }
     /**
      *Creates a string containing only whitespaces.

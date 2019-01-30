@@ -30,8 +30,8 @@ public:
     static void removePunctuation(std::string& word);
 private:
     const std::string pathToDictionary = "engmix.txt";
-    std::map<char, std::set<std::string>> m_dictionary;
-    std::map<char, std::set<std::string>> loadWords(std::string pathToFile);
+     std::map<char, std::set<std::string>> m_dictionary;
+     std::map<char, std::set<std::string>> loadWords(std::string pathToFile);
     
 };
 

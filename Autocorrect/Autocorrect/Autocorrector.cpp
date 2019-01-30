@@ -9,6 +9,7 @@
 #include "Autocorrector.hpp"
 #include <fstream>
 #include <algorithm>
+#include <atomic>
 
 autocorrector::autocorrector(){
     m_dictionary = loadWords(pathToDictionary);
@@ -136,7 +137,7 @@ autocorrector::vectorOfWords autocorrector::correctWord(std::string &word){
     }else{
         //iterating through the set of words
         auto it2 = (*it).second.begin();
-        size_t maxDistance = word.length();
+        size_t maxDistance = 3;
         
         while (it2 != (*it).second.end()) {
             size_t actualDistance = getDistance(word, *it2);
@@ -202,7 +203,7 @@ void autocorrector::correctWordParallel(std::string &word, std::promise<vectorOf
         size_t maxDistance = 3;
         
         while (it2 != (*it).second.end()) {
-            size_t actualDistance = getDistance(word, *it2);
+            size_t actualDistance = getDistance2(word, *it2);
             if (actualDistance == 0){
                 possibleWords.clear();
                 break;

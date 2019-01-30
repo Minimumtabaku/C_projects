@@ -24,7 +24,7 @@ std::chrono::milliseconds to_ms(TimePoint tp) {
 int main(int argc, const char * argv[]) {
     autocorrector ac = autocorrector();
     
-    std::string test = "milt";
+    std::string test = "Instead, lazy evaluaation is performd: the first cal to a ntimd wait function. guture adn only then it is msde redy. All furtdher";
     std::string w;
     std::stringstream ss(test);
     std::vector<std::string> words;
@@ -61,7 +61,7 @@ int main(int argc, const char * argv[]) {
     
     
     /// THIS IS STANDARD WAY OF DOING SHIT 22222
-    
+    start = std::chrono::high_resolution_clock::now();
     std::cout << test << std::endl;
     
     for (auto word : words) {
@@ -77,7 +77,7 @@ int main(int argc, const char * argv[]) {
             std::cout << std::endl;
         }
     }
-    
+    end = std::chrono::high_resolution_clock::now();
     std::cout << "------------------TIME-------------------" << std::endl;
     std::cout << "Needed " << to_ms(end - start).count() << " ms to finish.\n";
     
@@ -89,37 +89,34 @@ int main(int argc, const char * argv[]) {
     
     start = std::chrono::high_resolution_clock::now();
     
-    for (auto word : words) {
+    for (auto& word : words) {
         //pushni novou promise a future do vectoru
         std::promise<std::vector<std::string>> promise;
         //nabinduj promise a future
         std::future<std::vector<std::string>> future = promise.get_future();
-        std::thread th(&autocorrector::correctWordParallel,&ac,std::ref(word),std::move(promise));
-        th.join();
-        std::cout << "1";
-        future.wait();
-        const autocorrector::vectorOfWords vec = future.get();
-        
-        for (auto const& correction : vec) {
-            std::cout << correction << " ";
-        }
-//        futureVector.push_back(std::move(future));
-//        //tady nekde asi zacne thread
-//        threadsVector.push_back();
+        futureVector.push_back(std::move(future));
+        threadsVector.push_back(std::thread(&autocorrector::correctWordParallel,&ac,std::ref(word),std::move(promise)));
+       
     }
-//    for ( auto& future : futureVector) {
-//        threadsVector.at(0).join();
-//        std::cout << "1";
-//        const autocorrector::vectorOfWords vec = future.get();
-//        future.wait();
-//        for (auto const& correction : vec) {
-//            std::cout << correction << " ";
-//        }
-//    }
+    for (size_t i = 0; i < threadsVector.size(); i++) {
+        futureVector[i].wait();
+        const autocorrector::vectorOfWords vec = futureVector[i].get();
+        if(vec.size() == 0){
+            std::cout << "nothing to do" << std::endl;
+            threadsVector[i].join();
+        }else{
+            for (auto const& correction : vec) {
+                std::cout << correction << "::";
+            }
+            threadsVector[i].join();
+        }
+        
+    }
     
     end = std::chrono::high_resolution_clock::now();
     std::cout << "------------------TIME-------------------" << std::endl;
     std::cout << "Needed " << to_ms(end - start).count() << " ms to finish.\n";
     
+
     return 0;
 }

@@ -18,13 +18,25 @@
 
 
 class autocorrector{
+    /**
+     * Used to store relation between same character in different positions
+     * c1 and c2 in the input strings.
+     */
+    struct offset{
+        const int char1;
+        const int char2;
+        bool trans;
+        
+        offset(const int c1, const int c2, const bool trans) : char1(c1) , char2(c2), trans(trans) {};
+        
+    };
     
 public:
     using vectorOfWords = std::vector<std::string>;
     autocorrector();
     const size_t getDistance(const std::string&, const std::string&) const;
     const size_t getDistance2(const std::string&, const std::string&) const;
-     size_t getDistance3(std::string&, const std::string&) ;
+     size_t getDistance3(std::string&,const std::string&) ;
     vectorOfWords correctWord(std::string& word);
     vectorOfWords correctWord2(std::string& word);
     vectorOfWords correctWord3(std::string& word);

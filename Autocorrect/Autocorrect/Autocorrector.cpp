@@ -9,56 +9,155 @@
 #include "Autocorrector.hpp"
 #include <fstream>
 #include <algorithm>
-#include <atomic>
+#include <list>
+#include <math.h>
 
 autocorrector::autocorrector(){
     m_dictionary = loadWords(pathToDictionary);
 }
 
 const size_t autocorrector::getDistance2(const std::string & originalWord, const std::string & compareTo) const {
-    const size_t _maxOffset = originalWord.length();
-    const size_t m(originalWord.length());
-    const size_t n(compareTo.length());
+    if (originalWord.length() == 0) {
+        return compareTo.length();
+    }
     
-    if( m==0 ) return n;
-    if( n==0 ) return m;
+    if (compareTo.length() == 0) {
+        return originalWord.length();
+    }
     
-    int c = 0;
-    int offset1 = 0;
-    int offset2 = 0;
-    int lcs = 0;
-    while ((c + offset1 < originalWord.length())
-           && (c + offset2 < compareTo.length()))
-    {
-        if (originalWord[c + offset1] == compareTo[c + offset2]) lcs++;
-        else
-        {
-            offset1 = 0;
-            offset2 = 0;
-            if (originalWord[c] == compareTo[c])
-            {
-                c++;
-                continue;
+    size_t l1 = originalWord.length();
+    size_t l2 = compareTo.length();
+    
+    int c1 = 0;  //cursor for string 1
+    int c2 = 0;  //cursor for string 2
+    int lcss = 0;  //largest common subsequence
+    int local_cs = 0; //local common substring
+    int trans = 0;  //number of transpositions ('ab' vs 'ba')
+    
+    // offset pair array, for computing the transpositions
+    std::list<offset> offset_arr;
+    
+    while ((c1 < l1) && (c2 < l2)) {
+        if (originalWord[c1] == compareTo[c2]) {
+            local_cs++;
+            bool is_trans = false;
+            // see if current match is a transposition
+            auto it = offset_arr.begin();
+            while (it != offset_arr.end()) {
+                
+                if (c1 <= (*it).char1 || c2 <= (*it).char2) {
+                    // when two matches cross, the one considered a
+                    // transposition is the one with the largest difference
+                    // in offsets
+                    is_trans = abs(c2 - c1) >= abs((*it).char2 - (*it).char1);
+                    if (is_trans) {
+                        
+                        trans++;
+                    } else {
+                        if (!(*it).trans) {
+                            (*it).trans = true;
+                            trans++;
+                        }
+                    }
+                    
+                    break;
+                } else {
+                    if (c1 > (*it).char2 && c2 > (*it).char1) {
+                        offset_arr.erase(it);
+                    } else {
+                        it++;
+                    }
+                }
             }
-            for (int i = 1; i < _maxOffset; i++)
-            {
-                if ((c + i < originalWord.length())
-                    && (originalWord[c + i] == compareTo[c]))
-                {
-                    offset1 = i;
+            offset_arr.push_back({offset(c1, c2, is_trans)});
+            
+        } else {
+            
+            // originalWord.charAt(c1) != compareTo.charAt(c2)
+            lcss += local_cs;
+            local_cs = 0;
+            if (c1 != c2) {
+                //using min allows the computation of transpositions
+                c1 = std::min(c1, c2);
+                c2 = c1;
+            }
+            
+            // if matching characters are found, remove 1 from both cursors
+            // (they get incremented at the end of the loop)
+            // so that we can have only one code block handling matches
+            for (int i = 0; i < 10 && (c1 + i < l1 || c2 + i < l2); i++) {
+                
+                if ((c1 + i < l1) && (originalWord[c1 + i] == compareTo[c2])) {
+                    c1 += i - 1;
+                    c2--;
                     break;
                 }
-                if ((c + i < compareTo.length())
-                    && (originalWord[c] == compareTo[c + i]))
-                {
-                    offset2 = i;
+                
+                if ((c2 + i < l2) && (originalWord[c1] == compareTo[c2 + i])) {
+                    c1--;
+                    c2 += i - 1;
                     break;
                 }
             }
         }
-        c++;
+        c1++;
+        c2++;
+        // this covers the case where the last match is on the last token
+        // in list, so that it can compute transpositions correctly
+        if ((c1 >= l1) || (c2 >= l2)) {
+            lcss += local_cs;
+            local_cs = 0;
+            c1 = std::min(c1, c2);
+            c2 = c1;
+        }
     }
-    return (originalWord.length() + compareTo.length())/2 - lcs;
+    lcss += local_cs;
+    // add the cost of transpositions to the final result
+    return round(std::max(l1, l2) - lcss + trans);
+
+//    const size_t _maxOffset = originalWord.length();
+//    const size_t m(originalWord.length());
+//    const size_t n(compareTo.length());
+//
+//    if( m==0 ) return n;
+//    if( n==0 ) return m;
+//
+//    int c = 0;
+//    int offset1 = 0;
+//    int offset2 = 0;
+//    int lcs = 0;
+//    while ((c + offset1 < originalWord.length())
+//           && (c + offset2 < compareTo.length()))
+//    {
+//        if (originalWord[c + offset1] == compareTo[c + offset2]) lcs++;
+//        else
+//        {
+//            offset1 = 0;
+//            offset2 = 0;
+//            if (originalWord[c] == compareTo[c])
+//            {
+//                c++;
+//                continue;
+//            }
+//            for (int i = 1; i < _maxOffset; i++)
+//            {
+//                if ((c + i < originalWord.length())
+//                    && (originalWord[c + i] == compareTo[c]))
+//                {
+//                    offset1 = i;
+//                    break;
+//                }
+//                if ((c + i < compareTo.length())
+//                    && (originalWord[c] == compareTo[c + i]))
+//                {
+//                    offset2 = i;
+//                    break;
+//                }
+//            }
+//        }
+//        c++;
+//    }
+//    return (originalWord.length() + compareTo.length())/2 - lcs;
 }
 
 const size_t autocorrector::getDistance(const std::string & originalWord, const std::string & compareTo) const{
@@ -159,35 +258,37 @@ autocorrector::vectorOfWords autocorrector::correctWord(std::string &word){
     return possibleWords;
 }
 autocorrector::vectorOfWords autocorrector::correctWord2(std::string &word){
-//    char firstLetter = word[0];
-//    auto it = m_dictionary.find(firstLetter);
-//    std::vector<std::string> possibleWords;
-//    if (it == m_dictionary.end()) {
-//        //throw exeption
-//        ;
-//    }else{
-//        //iterating through the set of words
-//        auto it2 = (*it).second.begin();
-//        size_t maxDistance = word.length();
-//        
-//        while (it2 != (*it).second.end()) {
-//            size_t actualDistance = getDistance2(word, *it2);
-//            if (actualDistance == 0){
-//                possibleWords.clear();
-//                return possibleWords;
-//            }
-//            else if (actualDistance < maxDistance) {
-//                maxDistance = actualDistance;
-//                possibleWords.clear();
-//                possibleWords.push_back(*it2);
-//            }
-//            else if(actualDistance == maxDistance){
-//                possibleWords.push_back(*it2);
-//            }
-//            it2++;
-//        }
-//    }
-//    return possibleWords;
+    
+    
+    char firstLetter = word[0];
+    auto it = m_dictionary.find(firstLetter);
+    std::vector<std::string> possibleWords;
+    if (it == m_dictionary.end()) {
+        //throw exeption
+        ;
+    }else{
+        //iterating through the set of words
+        auto it2 = (*it).second.begin();
+        size_t maxDistance = word.length();
+
+        while (it2 != (*it).second.end()) {
+            size_t actualDistance = getDistance2(word, *it2);
+            if (actualDistance == 0){
+                possibleWords.clear();
+                return possibleWords;
+            }
+            else if (actualDistance < maxDistance) {
+                maxDistance = actualDistance;
+                possibleWords.clear();
+                possibleWords.push_back(*it2);
+            }
+            else if(actualDistance == maxDistance){
+                possibleWords.push_back(*it2);
+            }
+            it2++;
+        }
+    }
+    return possibleWords;
 }
 
 autocorrector::vectorOfWords autocorrector::correctWord3(std::string &word){

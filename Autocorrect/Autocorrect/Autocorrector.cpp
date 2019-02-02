@@ -159,6 +159,38 @@ autocorrector::vectorOfWords autocorrector::correctWord(std::string &word){
     return possibleWords;
 }
 autocorrector::vectorOfWords autocorrector::correctWord2(std::string &word){
+//    char firstLetter = word[0];
+//    auto it = m_dictionary.find(firstLetter);
+//    std::vector<std::string> possibleWords;
+//    if (it == m_dictionary.end()) {
+//        //throw exeption
+//        ;
+//    }else{
+//        //iterating through the set of words
+//        auto it2 = (*it).second.begin();
+//        size_t maxDistance = word.length();
+//        
+//        while (it2 != (*it).second.end()) {
+//            size_t actualDistance = getDistance2(word, *it2);
+//            if (actualDistance == 0){
+//                possibleWords.clear();
+//                return possibleWords;
+//            }
+//            else if (actualDistance < maxDistance) {
+//                maxDistance = actualDistance;
+//                possibleWords.clear();
+//                possibleWords.push_back(*it2);
+//            }
+//            else if(actualDistance == maxDistance){
+//                possibleWords.push_back(*it2);
+//            }
+//            it2++;
+//        }
+//    }
+//    return possibleWords;
+}
+
+autocorrector::vectorOfWords autocorrector::correctWord3(std::string &word){
     char firstLetter = word[0];
     auto it = m_dictionary.find(firstLetter);
     std::vector<std::string> possibleWords;
@@ -171,7 +203,7 @@ autocorrector::vectorOfWords autocorrector::correctWord2(std::string &word){
         size_t maxDistance = word.length();
         
         while (it2 != (*it).second.end()) {
-            size_t actualDistance = getDistance2(word, *it2);
+            size_t actualDistance = getDistance3(word, *it2);
             if (actualDistance == 0){
                 possibleWords.clear();
                 return possibleWords;
@@ -222,4 +254,40 @@ void autocorrector::correctWordParallel(std::string &word, std::promise<vectorOf
     promise.set_value(possibleWords);
 }
 
+size_t autocorrector::getDistance3( std::string & a, const std::string &b){
+//    std::transform(a.begin(), a.end(), a.begin(), ::tolower);
+//    std::transform(b.begin(), b.end(), b.begin(), ::tolower);
+    
+    std::vector<int> dist((a.length() + 1) * (b.length() + 1));
+    
+    for (int i = 0; i < (int)a.length() + 1; ++i)
+    {
+        dist[(b.length() + 1) * i] = i;
+    }
+    for (int j = 0; j < (int)b.length() + 1; ++j)
+    {
+        dist[j] = j;
+    }
+    
+    for (int i = 1; i < (int)a.length() + 1; ++i)
+    {
+        for (int j = 1; j < (int)b.length() + 1; ++j)
+        {
+            int suppr_dist = dist[(b.length() + 1) * (i - 1) + j] + 1;
+            int insert_dist = dist[(b.length() + 1) * i + j - 1] + 1;
+            int subs_dist = dist[(b.length() + 1) * (i - 1) + j - 1];
+            if (a[i - 1] != b[j - 1]) // word indexes are implemented differently.
+            {
+                subs_dist += 1;
+            }
+            int val = std::min(suppr_dist, std::min(insert_dist, subs_dist));
+            if (((i >= 2) && (j >= 2)) && ((a[i - 1] == b[j - 2]) && (a[i - 2] == b[j - 1])))
+            {
+                val = std::min(dist[(b.length() + 1) * (i - 2) + j - 2] + 1, val);
+            }
+            dist[(b.length() + 1) * i + j] = val;
+        }
+    }
+    return (dist[(a.length() + 1) * (b.length() + 1) - 1]);
 
+}

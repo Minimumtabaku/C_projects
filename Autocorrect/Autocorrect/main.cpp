@@ -24,7 +24,7 @@ std::chrono::milliseconds to_ms(TimePoint tp) {
 int main(int argc, const char * argv[]) {
     autocorrector ac = autocorrector();
     
-    std::string test = "Instead, lazy evaluaation is performd: the first cal to a ntimd wait function. guture adn only then it is msde redy. All furtdher";
+    std::string test = "Instead, lazy evaluaation";
     std::string w;
     std::stringstream ss(test);
     std::vector<std::string> words;
@@ -55,7 +55,7 @@ int main(int argc, const char * argv[]) {
         }
     }
     auto end = std::chrono::high_resolution_clock::now();
-    std::cout << "------------------TIME-------------------" << std::endl;
+    std::cout << "------------------TIME-------------------11111" << std::endl;
     std::cout << "Needed " << to_ms(end - start).count() << " ms to finish.\n";
     
     
@@ -78,7 +78,29 @@ int main(int argc, const char * argv[]) {
         }
     }
     end = std::chrono::high_resolution_clock::now();
-    std::cout << "------------------TIME-------------------" << std::endl;
+    std::cout << "------------------TIME-------------------222222222" << std::endl;
+    std::cout << "Needed " << to_ms(end - start).count() << " ms to finish.\n";
+    
+    
+    /// THIS IS STANDARD WAY OF DOING SHIT 3333333
+    start = std::chrono::high_resolution_clock::now();
+    std::cout << test << std::endl;
+    
+    for (auto word : words) {
+        auto ret = ac.correctWord3(word);
+        
+        if (ret.size() == 0) {
+            std::cout << word << std::endl;
+        } else {
+            std::cout << word << " corrections: ";
+            for (auto correction : ret) {
+                std::cout << correction << " ";
+            }
+            std::cout << std::endl;
+        }
+    }
+    end = std::chrono::high_resolution_clock::now();
+    std::cout << "------------------TIME-------------------33333333333" << std::endl;
     std::cout << "Needed " << to_ms(end - start).count() << " ms to finish.\n";
     
     
@@ -114,7 +136,7 @@ int main(int argc, const char * argv[]) {
     }
     
     end = std::chrono::high_resolution_clock::now();
-    std::cout << "------------------TIME-------------------" << std::endl;
+    std::cout << "------------------TIME-------------------4444444" << std::endl;
     std::cout << "Needed " << to_ms(end - start).count() << " ms to finish.\n";
     
 

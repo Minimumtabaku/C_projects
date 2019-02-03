@@ -1,0 +1,4 @@
+Cannot generate into /Users/minimumtanaku/Documents/GitHub/C_projects/Autocorrect/Autocorrect
+It is already used for unknown project
+
+Please either delete it manually or select another generation directory

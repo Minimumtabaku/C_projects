@@ -1,0 +1,3 @@
+/Users/minimumtanaku/Documents/GitHub/C_projects/Autocorrect/Autocorrect/CMakeFiles/rebuild_cache.dir
+/Users/minimumtanaku/Documents/GitHub/C_projects/Autocorrect/Autocorrect/CMakeFiles/edit_cache.dir
+/Users/minimumtanaku/Documents/GitHub/C_projects/Autocorrect/Autocorrect/CMakeFiles/main.dir

@@ -34,9 +34,12 @@ class autocorrector{
 public:
     using vectorOfWords = std::vector<std::string>;
     autocorrector();
+    autocorrector(const std::string& path);
+    autocorrector(const std::map<char,std::set<std::string>>& letterToWordMap);
+    autocorrector operator=(autocorrector);
     const size_t getDistance(const std::string&, const std::string&) const;
-    const size_t getDistance2(const std::string&, const std::string&) const;
-     size_t getDistance3(std::string&,const std::string&) ;
+    const float getDistance2(const std::string&, const std::string&) const;
+    const  size_t getDistance3(const std::string&,const std::string&) ;
     vectorOfWords correctWord(std::string& word);
     vectorOfWords correctWord2(std::string& word);
     vectorOfWords correctWord3(std::string& word);

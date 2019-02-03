@@ -16,11 +16,12 @@ I have decided to use Levenstein distance as a string metric, single threaded im
 After geting the words on std input program will run it through dictionary looking for closest words in the dictionary and return them.
 
 **Benchmarks**
-| number of words | single threaded | parallel |   |   |
-|-----------------|-----------------|----------|---|---|
-| 50              | 386 ms          | 100 ms   |   |   |
-| 200             | 2211 ms         | 575 ms   |   |   |
-| 1000            | 9970 ms         | 2668 ms  |   |   |
+
+| number of words | single threaded | parallel |
+|-----------------|-----------------|----------|
+| 50              | 386 ms          | 100 ms   |
+| 200             | 2211 ms         | 575 ms   |
+| 1000            | 9970 ms         | 2668 ms  |
 
 Testing was performed on MBP 2015 with these characteristics:
 - Processor Name:    Intel Core i7
@@ -31,3 +32,4 @@ Testing was performed on MBP 2015 with these characteristics:
 - L3 Cache:    6 MB
 - Memory:    16 GB
                          
+readme is wrtten for the commit 428805d, GitHub is displaying md tables in a weird way, maybe just download the file and view it locally.

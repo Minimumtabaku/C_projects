@@ -3,7 +3,7 @@
 //  Autocorrect
 //
 //  Created by Yevgen Ponomarenko on 1/23/19.
-//  Copyright © 2019 Yevgen Ponomarenko. All rights reserved.
+//  Copyright © 2019 Yevgen Ponomarenko.
 //
 
 #include <iostream>
@@ -45,7 +45,7 @@ int main(int argc, const char * argv[]) {
             std::map<char,std::set<std::string>> letterToWordMap;
             //TODO: check for i increment
             std::string nextArgument = argv[++i];
-            while ( nextArgument.find(":end") == std::string::npos && nextArgument.find("-") == std::string::npos ) {
+            while ( nextArgument.find(":end") == std::string::npos ) {
                 
                 auto it = letterToWordMap.find(nextArgument[0]);
                 //if keys is in the dictionary
@@ -58,12 +58,15 @@ int main(int argc, const char * argv[]) {
                 }
                 nextArgument = argv[++i];
             }
-            //to not read ":end" as a word, just skip it
-//            i++;
+ 
             ac = autocorrector(letterToWordMap);
         }else if(argument == "-h" || argument == "--help"){
-            std::string help = "Autocorrect HW PJC\nThis is a command line tool for simple autocorrection using Levenstein distance and SIFT3 algorithm\nUsage: autocorrector [options] [words to correct] \nOptions:\n -p, --parallel parallel execution of algorithm\n -d --dictionary followed by the words of the dictionary, use \":end\" to indicate end of the dictionary\n-f --file followed by the path to the file with dictionary";
-            std::cout << help << std::endl;
+            std::string help = "Autocorrect HW PJC\nThis is a command line tool for simple autocorrection using Levenstein distance\n";
+            std::string red = "Usage: autocorrector [options] [words to correct]\n";
+            std::string green = "Options:\n -p, --parallel parallel execution of algorithm\n -d --dictionary followed by the words of the dictionary, use \":end\" to indicate end of the dictionary\n-f --file followed by the path to the file with dictionary\n-h, --help to see help\n";
+            std::cout << help;
+            std::cout << termcolor::red << red << termcolor::reset;
+            std::cout << termcolor::green << green << termcolor::reset;
             return -1;
         }else{
             if (argument.find("-") != std::string::npos) {
@@ -84,17 +87,6 @@ int main(int argc, const char * argv[]) {
         return -1;
     }
     
-//    std::string test = wordsToCorrect.str();
-//    std::string w;
-//    std::stringstream ss(test);
-    
-//    std::vector<std::string> wordsPunc;
-    
-//    while (ss >> w) {
-//        wordsPunc.push_back(w);
-//        utils::removePunctuation(w);
-//        words.push_back(w);
-//    }
     for (auto word : words) {
         utils::removePunctuation(word);
     }
@@ -106,9 +98,9 @@ int main(int argc, const char * argv[]) {
         auto start = std::chrono::high_resolution_clock::now();
         
         for (auto& word : words) {
-            //pushni novou promise a future do vectoru
+            //push new promise and future to vector
             std::promise<std::vector<std::string>> promise;
-            //nabinduj promise a future
+            //bind promise and future
             std::future<std::vector<std::string>> future = promise.get_future();
             futureVector.push_back(std::move(future));
             threadsVector.push_back(std::thread(&autocorrector::correctWordParallel,&ac,std::ref(word),std::move(promise)));
@@ -118,7 +110,6 @@ int main(int argc, const char * argv[]) {
             futureVector[i].wait();
             const autocorrector::vectorOfWords vec = futureVector[i].get();
             if(vec.size() == 0){
-//                std::cout << "nothing to do" << std::endl;
                 threadsVector[i].join();
             }else{
                 for (auto const& correction : vec) {
@@ -131,125 +122,31 @@ int main(int argc, const char * argv[]) {
         }
         
         auto end = std::chrono::high_resolution_clock::now();
-        std::cout << "------------------TIME-------------------4444444" << std::endl;
+        std::cout << "------------------TIME-------------------" << std::endl;
         std::cout << "Needed " << to_ms(end - start).count() << " ms to finish.\n";
     }else{
         auto start = std::chrono::high_resolution_clock::now();
         
-        /// THIS IS STANDARD WAY OF DOING SHIT
-        
         for (auto word : words) {
-            auto ret = ac.correctWord(word);
-            
-            if (ret.size() == 0) {
-                std::cout << word << std::endl;
-            } else {
-//                std::cout << word << " corrections: ";
-                for (auto correction : ret) {
-                    std::cout << correction << " ";
+            try {
+                auto ret = ac.correctWord(word);
+                if (ret.size() == 0) {
+                    std::cout << word << std::endl;
+                } else {
+                    for (auto correction : ret) {
+                        std::cout << correction << " ";
+                    }
+                    std::cout << std::endl;
                 }
-                std::cout << std::endl;
+            } catch (std::invalid_argument e) {
+                std::cerr << e.what() << "provided word: " << word << std::endl;
             }
         }
+        
         auto end = std::chrono::high_resolution_clock::now();
         std::cout << "------------------TIME-------------------11111" << std::endl;
         std::cout << "Needed " << to_ms(end - start).count() << " ms to finish.\n";
-        
-        
-         start = std::chrono::high_resolution_clock::now();
-        
-        /// THIS IS STANDARD WAY OF DOING SHIT
-        
-        for (auto word : words) {
-            auto ret = ac.correctWord2(word);
-            
-            if (ret.size() == 0) {
-                std::cout << word << std::endl;
-            } else {
-                //                std::cout << word << " corrections: ";
-                for (auto correction : ret) {
-                    std::cout << correction << " ";
-                }
-                std::cout << std::endl;
-            }
-        }
-         end = std::chrono::high_resolution_clock::now();
-        std::cout << "------------------TIME-------------------2222222" << std::endl;
-        std::cout << "Needed " << to_ms(end - start).count() << " ms to finish.\n";
-        
-        start = std::chrono::high_resolution_clock::now();
-        
-        /// THIS IS STANDARD WAY OF DOING SHIT
-        
-        for (auto word : words) {
-            auto ret = ac.correctWord3(word);
-            
-            if (ret.size() == 0) {
-                std::cout << word << std::endl;
-            } else {
-                //                std::cout << word << " corrections: ";
-                for (auto correction : ret) {
-                    std::cout << correction << " ";
-                }
-                std::cout << std::endl;
-            }
-        }
-        end = std::chrono::high_resolution_clock::now();
-        std::cout << "------------------TIME-------------------33333333" << std::endl;
-        std::cout << "Needed " << to_ms(end - start).count() << " ms to finish.\n";
-        
     }
     
-    
-//
-//
-//    /// THIS IS STANDARD WAY OF DOING SHIT 22222
-//    start = std::chrono::high_resolution_clock::now();
-//    std::cout << test << std::endl;
-//
-//    for (auto word : words) {
-//        auto ret = ac.correctWord2(word);
-//
-//        if (ret.size() == 0) {
-//            std::cout << word << std::endl;
-//        } else {
-//            std::cout << word << " corrections: ";
-//            for (auto correction : ret) {
-//                std::cout << correction << " ";
-//            }
-//            std::cout << std::endl;
-//        }
-//    }
-//    end = std::chrono::high_resolution_clock::now();
-//    std::cout << "------------------TIME-------------------222222222" << std::endl;
-//    std::cout << "Needed " << to_ms(end - start).count() << " ms to finish.\n";
-//
-//
-//    /// THIS IS STANDARD WAY OF DOING SHIT 3333333
-//    start = std::chrono::high_resolution_clock::now();
-//    std::cout << test << std::endl;
-//
-//    for (auto word : words) {
-//        auto ret = ac.correctWord3(word);
-//
-//        if (ret.size() == 0) {
-//            std::cout << word << std::endl;
-//        } else {
-//            std::cout << word << " corrections: ";
-//            for (auto correction : ret) {
-//                std::cout << correction << " ";
-//            }
-//            std::cout << std::endl;
-//        }
-//    }
-//    end = std::chrono::high_resolution_clock::now();
-//    std::cout << "------------------TIME-------------------33333333333" << std::endl;
-//    std::cout << "Needed " << to_ms(end - start).count() << " ms to finish.\n";
-//
-//
-//    ///THIS PART IS IN PARELLEL
-//
-    
-
     return 0;
 }

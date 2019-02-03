@@ -1,4 +1,4 @@
-                                                ***Autocorrect PJC Homework***
+                                            ***Autocorrect PJC Homework***
 
 **Assignment**
 Write a program to perform autocorrection of a word or set of words passed as arguments. Final program will have single threaded implementation, as well as implementation using more threads. User will be able to choose between them.
@@ -16,12 +16,11 @@ I have decided to use Levenstein distance as a string metric, single threaded im
 After geting the words on std input program will run it through dictionary looking for closest words in the dictionary and return them.
 
 **Benchmarks**
-| number of words | single threaded | parallel |
-|-----------------|-----------------|----------|
-| 50              | 386 ms          | 100 ms   |
-| 200             | 2211 ms         | 575 ms   |
-| 1000            | 9970 ms         | 2668 ms  |
-
+| number of words | single threaded | parallel |   |   |
+|-----------------|-----------------|----------|---|---|
+| 50              | 386 ms          | 100 ms   |   |   |
+| 200             | 2211 ms         | 575 ms   |   |   |
+| 1000            | 9970 ms         | 2668 ms  |   |   |
 
 Testing was performed on MBP 2015 with these characteristics:
 - Processor Name:    Intel Core i7

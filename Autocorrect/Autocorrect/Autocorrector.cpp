@@ -194,29 +194,34 @@ void autocorrector::correctWordParallel(std::string &word, std::promise<vectorOf
     char firstLetter = word[0];
     auto it = m_dictionary.find(firstLetter);
     std::vector<std::string> possibleWords;
-    if (it == m_dictionary.end()) {
-       throw std::invalid_argument("provided word not in the same alphabet");
-    }else{
-        //iterating through the set of words
-        auto it2 = (*it).second.begin();
-        size_t maxDistance = 3;
-        
-        while (it2 != (*it).second.end()) {
-            size_t actualDistance = getDistanceParallel(word, *it2);
-            if (actualDistance == 0){
-                possibleWords.clear();
-                break;
+    try {
+        if (it == m_dictionary.end()) {
+            throw std::invalid_argument("provided word not in the same alphabet");
+        }else{
+            //iterating through the set of words
+            auto it2 = (*it).second.begin();
+            size_t maxDistance = 3;
+            
+            while (it2 != (*it).second.end()) {
+                size_t actualDistance = getDistanceParallel(word, *it2);
+                if (actualDistance == 0){
+                    possibleWords.clear();
+                    break;
+                }
+                else if (actualDistance < maxDistance) {
+                    maxDistance = actualDistance;
+                    possibleWords.clear();
+                    possibleWords.push_back(*it2);
+                }
+                else if(actualDistance == maxDistance){
+                    possibleWords.push_back(*it2);
+                }
+                it2++;
             }
-            else if (actualDistance < maxDistance) {
-                maxDistance = actualDistance;
-                possibleWords.clear();
-                possibleWords.push_back(*it2);
-            }
-            else if(actualDistance == maxDistance){
-                possibleWords.push_back(*it2);
-            }
-            it2++;
         }
+        promise.set_value(possibleWords);
+    } catch (const std::exception& e) {
+        promise.set_exception(std::current_exception());
     }
-    promise.set_value(possibleWords);
+    
 }

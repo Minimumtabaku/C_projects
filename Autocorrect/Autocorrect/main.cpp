@@ -107,17 +107,28 @@ int main(int argc, const char * argv[]) {
             
         }
         for (size_t i = 0; i < threadsVector.size(); i++) {
-            futureVector[i].wait();
-            const autocorrector::vectorOfWords vec = futureVector[i].get();
-            if(vec.size() == 0){
-                threadsVector[i].join();
-            }else{
-                for (auto const& correction : vec) {
-                    std::cout << correction << " ";
+            try {
+                futureVector[i].wait();
+                try {
+                    const autocorrector::vectorOfWords vec = futureVector[i].get();
+                    
+                    if(vec.size() == 0){
+                        threadsVector[i].join();
+                    }else{
+                        for (auto const& correction : vec) {
+                            std::cout << correction << " ";
+                        }
+                        std::cout << std::endl;
+                        threadsVector[i].join();
+                    }
+                } catch (std::exception& e) {
+                    std::cerr << e.what() << std::endl;
+                    threadsVector[i].join();
                 }
-                std::cout << std::endl;
-                threadsVector[i].join();
+            } catch (const std::exception& e) {
+                std::cerr << e.what() << std::endl;
             }
+            
             
         }
         
@@ -144,7 +155,7 @@ int main(int argc, const char * argv[]) {
         }
         
         auto end = std::chrono::high_resolution_clock::now();
-        std::cout << "------------------TIME-------------------11111" << std::endl;
+        std::cout << "------------------TIME-------------------" << std::endl;
         std::cout << "Needed " << to_ms(end - start).count() << " ms to finish.\n";
     }
     

@@ -32,4 +32,3 @@ Testing was performed on MBP 2015 with these characteristics:
 - L3 Cache:    6 MB
 - Memory:    16 GB
                          
-readme is wrtten for the commit 428805d, GitHub is displaying md tables in a weird way, maybe just download the file and view it locally.
